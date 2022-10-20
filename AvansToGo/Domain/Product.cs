@@ -7,10 +7,5 @@ namespace Core.Domain
         public string Name { get; set; }
         public bool ContainsAlcohol { get; set; }
         public byte[] image { get; set; }
-
-        public Product()
-        {
-
-        }
     }
 }

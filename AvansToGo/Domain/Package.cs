@@ -12,11 +12,5 @@
         public DateTime PickUpTimeStart { get; set; }
         public DateTime PickUpTimeEnd { get; set; }
         public EnumMealType type;
-
-        public Package(string name, EnumCity City)
-        {
-            this.Name = name;
-            this.City = City;
-        }
     }
 }
