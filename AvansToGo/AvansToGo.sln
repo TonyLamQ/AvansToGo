@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain.Services", "Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5482FBFC-6BAE-42C4-B29C-7BB1CD8ADEAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal", "Portal\Portal.csproj", "{FE7836EE-6AAF-4FE0-84E4-05BA1F8B1744}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal", "Portal\Portal.csproj", "{FE7836EE-6AAF-4FE0-84E4-05BA1F8B1744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{80E40D8B-6EEA-4B27-903D-1E76E3FA90C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{FE7836EE-6AAF-4FE0-84E4-05BA1F8B1744}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE7836EE-6AAF-4FE0-84E4-05BA1F8B1744}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE7836EE-6AAF-4FE0-84E4-05BA1F8B1744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E40D8B-6EEA-4B27-903D-1E76E3FA90C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E40D8B-6EEA-4B27-903D-1E76E3FA90C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E40D8B-6EEA-4B27-903D-1E76E3FA90C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E40D8B-6EEA-4B27-903D-1E76E3FA90C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

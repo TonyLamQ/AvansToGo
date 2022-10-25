@@ -1,13 +1,18 @@
-﻿namespace Core.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Core.Domain
 {
     public class Student
     {
         public int StudentId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateOnly BirthDate { get; set; }
-        public string Email { get; set; }
+        [Required]
+        public string FirstName { get; set; } = null!;
+        [Required]
+        public string LastName { get; set; } = null!;
+        public DateTime BirthDate { get; set; }
+        [Required]
+        public string Email { get; set; } = null!;
         public EnumCity City { get; set; }
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 }

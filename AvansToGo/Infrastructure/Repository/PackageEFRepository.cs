@@ -1,0 +1,29 @@
+﻿using Core.Domain;
+using Core.Domain.Services.IRepository;
+
+namespace Infrastructure.Repository
+{
+    public class PackageEFRepository : IPackageRepo
+    {
+        private readonly AvansToGoContext _context;
+        public PackageEFRepository(AvansToGoContext context)
+        {
+            _context = context;
+        }
+
+        public IQueryable<Package> GetAll()
+        {
+            return _context.Packages;
+        }
+
+        public List<Package> GetReservedPackagesBy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Package> GetUnReservedPackages()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

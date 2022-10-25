@@ -24,3 +24,7 @@ C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\obj\Debug\net6.0\refint\Portal.
 C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\obj\Debug\net6.0\Portal.pdb
 C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\obj\Debug\net6.0\Portal.genruntimeconfig.cache
 C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\obj\Debug\net6.0\ref\Portal.dll
+C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\obj\Debug\net6.0\scopedcss\Views\Home\Index.cshtml.rz.scp.css
+C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\bin\Debug\net6.0\Core.Domain.dll
+C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\bin\Debug\net6.0\Core.Domain.pdb
+C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal\obj\Debug\net6.0\Portal.csproj.CopyComplete

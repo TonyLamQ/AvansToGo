@@ -1,11 +1,13 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace Core.Domain
 {
     public class Product
     {
-        public string Name { get; set; }
+        [Key]
+        public string Name { get; set; } = null!;
         public bool ContainsAlcohol { get; set; }
-        public byte[] image { get; set; }
+        public byte[]? Image { get; set; }
     }
 }

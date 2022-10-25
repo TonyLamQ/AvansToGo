@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Portal/1.0.0": {
+        "dependencies": {
+          "Core.Domain": "1.0.0"
+        },
         "runtime": {
           "Portal.dll": {}
+        }
+      },
+      "Core.Domain/1.0.0": {
+        "runtime": {
+          "Core.Domain.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Portal/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Core.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

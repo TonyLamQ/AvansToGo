@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "83DdtGcnAxIkmO3erggIeF2KdovSud+kh2yWY2mEjDE=",
+  "Hash": "KvPj2qftsB/hAIJIg1bR9bmAVMFV8a2KEwjTB1ZQnzI=",
   "Source": "Portal",
   "BasePath": "_content/Portal",
   "Mode": "Default",
@@ -83,23 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
-    },
-    {
-      "Identity": "C:\\Users\\Tony\\Desktop\\AvansToGo\\AvansToGo\\Portal\\wwwroot\\favicon2.ico",
-      "SourceId": "Portal",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tony\\Desktop\\AvansToGo\\AvansToGo\\Portal\\wwwroot\\",
-      "BasePath": "_content/Portal",
-      "RelativePath": "favicon2.ico",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon2.ico"
     },
     {
       "Identity": "C:\\Users\\Tony\\Desktop\\AvansToGo\\AvansToGo\\Portal\\wwwroot\\js\\site.js",
