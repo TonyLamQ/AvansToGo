@@ -65,9 +65,7 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           @*Input Code for-loop items*@
-          @if (@Model == null){
-          } else {
-                foreach (var package in @Model)
+                @foreach (var package in @Model)
                 {
                     <div class="col">
                         <div class="card shadow-sm">
@@ -80,13 +78,13 @@
                                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Add</button>
                                     </div>
-                                    <small class="text-muted">@package.price</small>
+                                    <small class="text-muted">@package.Price</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
-          }
+          
       </div>
     </div>
  </div>

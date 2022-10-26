@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Domain.Services.IRepository;
+using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using System.Diagnostics;
 
@@ -7,15 +8,22 @@ namespace Portal.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IPackageRepo _PackageRepo;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(
+            ILogger<HomeController> logger,
+            IPackageRepo PackageRepo
+            )
         {
             _logger = logger;
+            _PackageRepo = PackageRepo;
+
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_PackageRepo.GetAll().ToViewModel());
         }
 
         public IActionResult Privacy()

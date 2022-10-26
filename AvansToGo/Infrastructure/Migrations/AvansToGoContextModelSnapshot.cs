@@ -79,11 +79,11 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime?>("PickUpTimeStart")
                         .HasColumnType("datetime2");
 
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int?>("ReservedByStudentId")
                         .HasColumnType("int");
-
-                    b.Property<double?>("price")
-                        .HasColumnType("float");
 
                     b.HasKey("Name");
 

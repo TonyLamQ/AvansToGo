@@ -1,6 +1,22 @@
+using Core.Domain.Services.IRepository;
+using Infrastructure.Repository;
+using Core.Domain.Services.IServices;
+using Core.Domain.Services.Services;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var connectionString = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddDbContext<AvansToGoContext>(options => options.UseSqlServer(connectionString));
+
+//var userConnectionString = builder.Configuration.GetConnectionString("Security");
+//builder.Services.AddDbContext<SecurityDbContext>(options => options.UseSqlServer(userConnectionString));
+
+builder.Services.AddScoped<IPackageRepo, PackageEFRepository>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
