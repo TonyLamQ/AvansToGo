@@ -27,7 +27,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("City")
+                    b.Property<int>("City")
                         .HasColumnType("int");
 
                     b.Property<bool?>("ServesHotMeals")
@@ -36,6 +36,26 @@ namespace Infrastructure.Migrations
                     b.HasKey("Location");
 
                     b.ToTable("Canteens");
+
+                    b.HasData(
+                        new
+                        {
+                            Location = "LA200",
+                            City = 0,
+                            ServesHotMeals = true
+                        },
+                        new
+                        {
+                            Location = "LA300",
+                            City = 2,
+                            ServesHotMeals = false
+                        },
+                        new
+                        {
+                            Location = "LA400",
+                            City = 1,
+                            ServesHotMeals = true
+                        });
                 });
 
             modelBuilder.Entity("Core.Domain.Employee", b =>
@@ -50,10 +70,6 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
@@ -65,6 +81,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CanteenLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("City")
@@ -92,6 +109,32 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ReservedByStudentId");
 
                     b.ToTable("Packages");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "Test",
+                            CanteenLocation = "LA200",
+                            City = 0,
+                            ContainsAlcohol = true,
+                            Price = 10.0
+                        },
+                        new
+                        {
+                            Name = "Test2",
+                            CanteenLocation = "LA300",
+                            City = 2,
+                            ContainsAlcohol = false,
+                            Price = 13.0
+                        },
+                        new
+                        {
+                            Name = "Test3",
+                            CanteenLocation = "LA400",
+                            City = 1,
+                            ContainsAlcohol = true,
+                            Price = 14.0
+                        });
                 });
 
             modelBuilder.Entity("Core.Domain.Product", b =>
@@ -133,11 +176,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -153,7 +192,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Domain.Canteen", "Canteen")
                         .WithMany()
-                        .HasForeignKey("CanteenLocation");
+                        .HasForeignKey("CanteenLocation")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Domain.Student", "ReservedBy")
                         .WithMany()

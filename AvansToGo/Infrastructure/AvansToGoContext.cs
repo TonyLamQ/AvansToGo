@@ -17,12 +17,41 @@ namespace Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            IEnumerable<Package> packages = new List<Package> {
-            new Package { Name = "Test", Price = 10.00 } };
+
+            IEnumerable<Canteen> Canteens = new List<Canteen>
+            {
+                new Canteen
+            {
+                City = EnumCity.Breda,
+                Location = "LA200",
+                ServesHotMeals = true
+            },
+                new Canteen
+            {
+                City = EnumCity.Tilburg,
+                Location = "LA300",
+                ServesHotMeals = false
+            },
+                new Canteen
+            {
+                City = EnumCity.DenBosch,
+                Location = "LA400",
+                ServesHotMeals = true
+            }
+        };
+
+        
+
+            IEnumerable<Package> Packages = new List<Package> {
+            new Package { Name = "Test", City = EnumCity.Breda, Price = 10.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[0].Location.ToString()},
+            new Package { Name = "Test2", City = EnumCity.Tilburg, Price = 13.00, ContainsAlcohol = false, CanteenLocation = Canteens.ToList()[1].Location.ToString()},
+            new Package { Name = "Test3", City = EnumCity.DenBosch, Price = 14.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[2].Location.ToString()}
+            };
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Package>().HasData(packages);
+            modelBuilder.Entity<Canteen>().HasData(Canteens);
+            modelBuilder.Entity<Package>().HasData(Packages);
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

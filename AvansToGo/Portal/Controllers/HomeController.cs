@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Services.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using System.Diagnostics;
@@ -23,10 +24,11 @@ namespace Portal.Controllers
 
         public IActionResult Index()
         {
-            return View(_PackageRepo.GetAll().ToViewModel());
+            return View(_PackageRepo.GetUnReservedPackages());
         }
 
-        public IActionResult Privacy()
+        [Authorize(Policy = "StudentOnly")]
+        public IActionResult Testing()
         {
             return View();
         }

@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Domain
 {
-    public class Student
+    public class Student : IdentityUser
     {
         public int StudentId { get; set; }
         [Required]
-        public string FirstName { get; set; } = null!;
-        [Required]
-        public string LastName { get; set; } = null!;
+        public string Name { get; set; } = null!;
         public DateTime BirthDate { get; set; }
         [Required]
         public string Email { get; set; } = null!;

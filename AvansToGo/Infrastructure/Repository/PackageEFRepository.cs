@@ -23,7 +23,7 @@ namespace Infrastructure.Repository
 
         public List<Package> GetUnReservedPackages()
         {
-            throw new NotImplementedException();
+            return _context.Packages.Select(p=> p).Where(p => p.ReservedBy==null).ToList(); 
         }
     }
 }

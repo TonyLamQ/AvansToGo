@@ -1,3 +1,10 @@
+:root {
+    --bs-primary: #c00000;
+    --bs-secondary: #740202;
+    --bs-primary-rgb: 192, 0, 0;
+    --bs-secondary-rgb: 116, 2, 2;
+}
+
 html {
   font-size: 14px;
 }
@@ -14,5 +21,6 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #fdf8f2;
 }

@@ -15,8 +15,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Tony\Desktop\AvansToGo\AvansToGo\Portal
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Admin/PackageManager.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFja2FnZU1hbmFnZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Home/Testing.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0aW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Shared/Error.cshtml]
