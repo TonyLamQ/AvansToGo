@@ -19,12 +19,8 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Admin/PackageManager.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFja2FnZU1hbmFnZXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Home/Testing.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0aW5nLmNzaHRtbA==
+[C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Package/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja2FnZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Tony/Desktop/AvansToGo/AvansToGo/Portal/Views/Shared/Error.cshtml]

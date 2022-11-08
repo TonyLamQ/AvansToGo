@@ -35,7 +35,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Location");
 
-                    b.ToTable("Canteens");
+                    b.ToTable("Canteens", (string)null);
 
                     b.HasData(
                         new
@@ -72,7 +72,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("Core.Domain.Package", b =>
@@ -108,7 +108,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ReservedByStudentId");
 
-                    b.ToTable("Packages");
+                    b.ToTable("Packages", (string)null);
 
                     b.HasData(
                         new
@@ -155,7 +155,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PackageName");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Core.Domain.Student", b =>
@@ -185,7 +185,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("Core.Domain.Package", b =>

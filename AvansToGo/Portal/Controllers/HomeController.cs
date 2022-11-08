@@ -30,7 +30,7 @@ namespace Portal.Controllers
         {
             return View(_PackageRepo.GetUnReservedPackages());
         }
-        [Authorize]
+        [Authorize(Policy = "StudentOnly")]
         public IActionResult List()
         {
             var Student = _StudentRepo.GetStudentByEmail(User.FindFirstValue(ClaimTypes.Email));
