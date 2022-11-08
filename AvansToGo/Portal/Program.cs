@@ -28,6 +28,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(config =>
 builder.Services.AddAuthorization(options =>
     options.AddPolicy("StudentOnly", policy => policy.RequireClaim("Student")));
 
+builder.Services.AddAuthorization(options =>
+    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("Employee")));
+
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.Cookie.Name = "Identiy.Cookie";
@@ -35,6 +38,7 @@ builder.Services.ConfigureApplicationCookie(config =>
 });
 
 builder.Services.AddScoped<IPackageRepo, PackageEFRepository>();
+builder.Services.AddScoped<IStudentRepo, StudentEFRepository>();
 
 builder.Services.AddControllersWithViews();
 

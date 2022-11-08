@@ -40,7 +40,19 @@ namespace Infrastructure
             }
         };
 
-        
+            IEnumerable<Student> Students = new List<Student>
+            {
+                new Student{ UserName= "Peter", Email="Student@gmail.com", BirthDate= new DateTime(2000,3,3), City = EnumCity.Breda, PhoneNumber="0612344321", StudentId= 1 },
+                new Student{ UserName= "Jan", Email="Jan@gmail.com", BirthDate= new DateTime(2003,1,8), City = EnumCity.DenBosch, PhoneNumber="0622344321", StudentId= 2 },
+                new Student{ UserName= "Esrid", Email="Esrid@gmail.com", BirthDate= new DateTime(2002,7,5), City = EnumCity.Tilburg, PhoneNumber="0632344321", StudentId= 3 }
+            };
+
+            IEnumerable<Employee> Employees = new List<Employee>
+            {
+                new Employee{ EmployeeId= 1, UserName="Tim"}
+            };
+
+
 
             IEnumerable<Package> Packages = new List<Package> {
             new Package { Name = "Test", City = EnumCity.Breda, Price = 10.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[0].Location.ToString()},
@@ -52,6 +64,8 @@ namespace Infrastructure
 
             modelBuilder.Entity<Canteen>().HasData(Canteens);
             modelBuilder.Entity<Package>().HasData(Packages);
+            modelBuilder.Entity<Employee>().HasData(Employees);
+            modelBuilder.Entity<Student>().HasData(Students);
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

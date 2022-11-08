@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Portal.Controllers
 {
@@ -10,21 +11,30 @@ namespace Portal.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IPackageRepo _PackageRepo;
+        private readonly IStudentRepo _StudentRepo;
 
 
         public HomeController(
             ILogger<HomeController> logger,
-            IPackageRepo PackageRepo
+            IPackageRepo PackageRepo,
+             IStudentRepo StudentRepo
             )
         {
             _logger = logger;
             _PackageRepo = PackageRepo;
+            _StudentRepo = StudentRepo;
 
         }
 
         public IActionResult Index()
         {
             return View(_PackageRepo.GetUnReservedPackages());
+        }
+        [Authorize]
+        public IActionResult List()
+        {
+            var Student = _StudentRepo.GetStudentByEmail(User.FindFirstValue(ClaimTypes.Email));
+            return View("Index", _PackageRepo.GetReservedPackagesBy(Student));
         }
 
         [Authorize(Policy = "StudentOnly")]

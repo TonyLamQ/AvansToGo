@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Domain
 {
-    public class Student : IdentityUser
+    public class Student
     {
         public int StudentId { get; set; }
         [Required]
-        public string Name { get; set; } = null!;
+        public string UserName { get; set; } = null!;
         public DateTime BirthDate { get; set; }
         [Required]
         public string Email { get; set; } = null!;

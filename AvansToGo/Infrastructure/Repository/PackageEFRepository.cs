@@ -16,9 +16,9 @@ namespace Infrastructure.Repository
             return _context.Packages;
         }
 
-        public List<Package> GetReservedPackagesBy()
+        public List<Package> GetReservedPackagesBy(Student Student)
         {
-            throw new NotImplementedException();
+            return _context.Packages.Select(p => p).Where(p => p.ReservedBy == Student).ToList();
         }
 
         public List<Package> GetUnReservedPackages()

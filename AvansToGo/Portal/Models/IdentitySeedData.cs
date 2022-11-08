@@ -18,7 +18,7 @@ namespace Portal.Models
             IdentityUser Student = await userManager.FindByIdAsync(StudentUser);
             if (Student == null)
             {
-                Student = new Student()
+                Student = new IdentityUser()
                 {
                     UserName = "Student",
                     Email = "Student@gmail.com"
@@ -30,12 +30,13 @@ namespace Portal.Models
             IdentityUser Employee = await userManager.FindByIdAsync(EmployeeUser);
             if (Employee == null)
             {
-                Employee = new Employee()
+                Employee = new IdentityUser()
                 {
                     UserName = "Employee",
                     Email = "Employee@gmail.com",
                 };
                 await userManager.CreateAsync(Employee, EmployeePassword);
+                await userManager.AddClaimAsync(Employee, new Claim("Employee", "true"));
             }
         }
     }

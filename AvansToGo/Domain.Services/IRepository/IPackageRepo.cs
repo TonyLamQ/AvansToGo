@@ -12,7 +12,7 @@ namespace Core.Domain.Services.IRepository
 
         //Read
         IQueryable<Package> GetAll();
-        List<Package> GetReservedPackagesBy();
+        List<Package> GetReservedPackagesBy(Student Student);
         List<Package> GetUnReservedPackages();
         //Update
 
