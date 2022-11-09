@@ -55,7 +55,7 @@ namespace Infrastructure
 
 
             IEnumerable<Package> Packages = new List<Package> {
-            new Package { Name = "Test", City = EnumCity.Breda, Price = 10.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[0].Location.ToString()},
+            new Package { Name = "Test", City = EnumCity.Breda, StudentId= Students.ToList()[0].StudentId, Price = 10.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[0].Location},
             new Package { Name = "Test2", City = EnumCity.Tilburg, Price = 13.00, ContainsAlcohol = false, CanteenLocation = Canteens.ToList()[1].Location.ToString()},
             new Package { Name = "Test3", City = EnumCity.DenBosch, Price = 14.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[2].Location.ToString()}
             };

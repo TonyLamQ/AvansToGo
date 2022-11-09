@@ -13,5 +13,6 @@ namespace Core.Domain
         public string Email { get; set; } = null!;
         public EnumCity City { get; set; }
         public string? PhoneNumber { get; set; }
+        public List<Package>? Packages { get; set; }
     }
 }

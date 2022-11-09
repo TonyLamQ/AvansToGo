@@ -15,5 +15,17 @@ namespace Portal.Models
 
             return result;
         }
+
+        public static List<Package> ToViewModel(this IQueryable<Package> packages)
+        {
+            var result = new List<Package>();
+
+            foreach (var package in packages)
+            {
+                result.Add(package);
+            }
+
+            return result;
+        }
     }
 }

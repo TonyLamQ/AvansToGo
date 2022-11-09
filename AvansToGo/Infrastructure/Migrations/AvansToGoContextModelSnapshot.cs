@@ -35,7 +35,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Location");
 
-                    b.ToTable("Canteens", (string)null);
+                    b.ToTable("Canteens");
 
                     b.HasData(
                         new
@@ -66,13 +66,20 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"), 1L, 1);
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            UserName = "Tim"
+                        });
                 });
 
             modelBuilder.Entity("Core.Domain.Package", b =>
@@ -99,16 +106,16 @@ namespace Infrastructure.Migrations
                     b.Property<double?>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ReservedByStudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Name");
 
                     b.HasIndex("CanteenLocation");
 
-                    b.HasIndex("ReservedByStudentId");
+                    b.HasIndex("StudentId");
 
-                    b.ToTable("Packages", (string)null);
+                    b.ToTable("Packages");
 
                     b.HasData(
                         new
@@ -117,7 +124,8 @@ namespace Infrastructure.Migrations
                             CanteenLocation = "LA200",
                             City = 0,
                             ContainsAlcohol = true,
-                            Price = 10.0
+                            Price = 10.0,
+                            StudentId = 1
                         },
                         new
                         {
@@ -155,7 +163,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PackageName");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Core.Domain.Student", b =>
@@ -176,16 +184,45 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            StudentId = 1,
+                            BirthDate = new DateTime(2000, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            City = 0,
+                            Email = "Student@gmail.com",
+                            PhoneNumber = "0612344321",
+                            UserName = "Peter"
+                        },
+                        new
+                        {
+                            StudentId = 2,
+                            BirthDate = new DateTime(2003, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            City = 1,
+                            Email = "Jan@gmail.com",
+                            PhoneNumber = "0622344321",
+                            UserName = "Jan"
+                        },
+                        new
+                        {
+                            StudentId = 3,
+                            BirthDate = new DateTime(2002, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            City = 2,
+                            Email = "Esrid@gmail.com",
+                            PhoneNumber = "0632344321",
+                            UserName = "Esrid"
+                        });
                 });
 
             modelBuilder.Entity("Core.Domain.Package", b =>
@@ -197,8 +234,8 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Core.Domain.Student", "ReservedBy")
-                        .WithMany()
-                        .HasForeignKey("ReservedByStudentId");
+                        .WithMany("Packages")
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Canteen");
 
@@ -215,6 +252,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Domain.Package", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Core.Domain.Student", b =>
+                {
+                    b.Navigation("Packages");
                 });
 #pragma warning restore 612, 618
         }

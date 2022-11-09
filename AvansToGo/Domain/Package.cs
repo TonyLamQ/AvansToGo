@@ -11,10 +11,11 @@ namespace Core.Domain
         public double? Price { get; set; }
         public Canteen Canteen { get; set; } = null!;
         public string CanteenLocation { get; set; } = null!;
-        public Student? ReservedBy { get; set; }
         public List<Product> Products { get; set; } = null!;
         public DateTime? PickUpTimeStart { get; set; }
         public DateTime? PickUpTimeEnd { get; set; }
         public EnumMealType Type;
+        public Student? ReservedBy { get; set; }
+        public int? StudentId { get; set; }
     }
 }
