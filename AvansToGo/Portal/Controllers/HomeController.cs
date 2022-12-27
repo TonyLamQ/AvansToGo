@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using System.Diagnostics;
 using System.Security.Claims;
+using Core.Domain;
 
 namespace Portal.Controllers
 {
@@ -38,8 +39,12 @@ namespace Portal.Controllers
         }
 
         [Authorize(Policy = "StudentOnly")]
-        public IActionResult Testing()
+        public IActionResult ReservePacakge(Package package)
         {
+            var Student = _StudentRepo.GetStudentByEmail(User.FindFirstValue(ClaimTypes.Email));
+            //Insert UpdatePackageReservedBy
+            
+            //ToDo: Input SUcceeded PopUp
             return View();
         }
 

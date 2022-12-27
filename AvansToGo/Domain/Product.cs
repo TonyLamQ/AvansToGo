@@ -8,6 +8,6 @@ namespace Core.Domain
         [Key]
         public string Name { get; set; } = null!;
         public bool ContainsAlcohol { get; set; }
-        public byte[]? Image { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

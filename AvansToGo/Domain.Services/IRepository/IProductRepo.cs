@@ -8,5 +8,6 @@ namespace Core.Domain.Services.IRepository
 {
     public interface IProductRepo
     {
+        public IQueryable<Product> GetAll();
     }
 }

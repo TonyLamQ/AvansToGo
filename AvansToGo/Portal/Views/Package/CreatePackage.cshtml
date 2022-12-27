@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    //Layout="";
+}
+@model PackageViewModel
+
+<div class="d-flex flex-row">
+    <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
+        @*    <a href="/" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
+        <svg class="bi pe-none" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+        <span class="visually-hidden">Icon-only</span>
+        </a>*@
+        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Package" asp-action="Index" class="nav-link py-3 border-bottom rounded-0" title="All packages" data-bs-toggle="tooltip" data-bs-placement="right">
+                    @*           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home" /></svg>*@
+                    <i class="bi bi-list-ul"></i>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Package" asp-action="CreatePackage" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Add packages" data-bs-toggle="tooltip" data-bs-placement="right">
+                    @*       <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2" /></svg>*@
+                    <i class="bi bi-plus-circle"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container mt-5 d-flex flex-column flex-shrink-1 list-group w-100">
+        <h1>Create a new package!</h1></><hr />
+
+        <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="row g-5">
+      <div class="col-md-7 col-lg-8">
+
+         <form asp-action="CreatePackage" asp-controller="Package" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="form-group">
+                 <label asp-for="Name"></label>
+                 <input asp-for="Name" class="form-control" />
+                 <div><span asp-validation-for="Name" class="text-danger"></span></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+               <div class="form-group">
+                  <label asp-for="Price"></label>
+                  <input asp-for="Price" type="number" min="1" class="form-control" value="5.00"/>
+                  <div><span asp-validation-for="Price" class="text-danger"></span></div>
+               </div>
+            </div>
+
+                        <label asp-for="Products">Select Products</label>
+                            @foreach(var checkbox in @Model.Checkboxes){
+                                <div class="form-check">
+                                <input class="form-check-input"
+                                       name=Products
+                                       type="checkbox" 
+                                       value="@checkbox.Value"
+                                       id="@checkbox.Value.Name" 
+                                       checked="@checkbox.IsChecked">
+                                <label class="form-check-label" for=@checkbox.Value.Name>
+                                    @checkbox.Value.Name
+                                    </label>
+                                </div>
+                            }
+ 
+
+            <div class="col-md-4">
+              <label asp-for="CanteenLocation" class="form-label">Location</label>
+              <input class="form-control" asp-for="CanteenLocation" required placeholder="e.g. Ld105">
+              <div><span asp-validation-for="CanteenLocation" class="text-danger"></span></div>
+            </div>
+
+@*            <div class="col-md-3">
+              <label for="zip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="zip" placeholder="" required>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>*@
+          </div>
+
+          <hr class="my-4">
+
+          <div class="form-check">
+            <input asp-for="ContainsAlcohol" type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label" for="same-address">Contains Alcohol</label>
+          </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Add Package</button>
+        </form>
+      </div>
+    </div>
+
+    </div>
+</div>

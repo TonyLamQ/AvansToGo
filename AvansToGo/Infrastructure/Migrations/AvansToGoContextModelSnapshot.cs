@@ -153,8 +153,8 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("ContainsAlcohol")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PackageName")
                         .HasColumnType("nvarchar(450)");
@@ -164,6 +164,32 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PackageName");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "Sauzijnenbroodje",
+                            ContainsAlcohol = false,
+                            ImageUrl = "https://images0.persgroep.net/rcs/iicE-7D10ut18K6FnZtMYA2_z8k/diocontent/159715277/_focus/0.62/0.3/_fill/1200/630/?appId=21791a8992982cd8da851550a453bd7f&quality=0.7"
+                        },
+                        new
+                        {
+                            Name = "Worstenbroodje",
+                            ContainsAlcohol = false,
+                            ImageUrl = "https://cdn.heelhollandbakt.nl/2022/05/vegan-worstenbroodjes-robert-enzo.jpg"
+                        },
+                        new
+                        {
+                            Name = "Red wine",
+                            ContainsAlcohol = true,
+                            ImageUrl = "https://cdn-prod.medicalnewstoday.com/content/images/articles/300/300854/red-wine.jpg"
+                        },
+                        new
+                        {
+                            Name = "Orange juice",
+                            ContainsAlcohol = false,
+                            ImageUrl = "https://www.smart-meals.nl/wp-content/uploads/2021/09/Versse-sinaasappelsap.jpg"
+                        });
                 });
 
             modelBuilder.Entity("Core.Domain.Student", b =>

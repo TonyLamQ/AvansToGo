@@ -10,7 +10,13 @@ namespace Infrastructure.Repository
         {
             _context = context;
         }
-
+        //Create
+        public async Task AddPackage(Package package)
+        {
+            _context.Packages.Add(package);
+            await _context.SaveChangesAsync();
+        }
+        //Read
         public IQueryable<Package> GetAll()
         {
             return _context.Packages;

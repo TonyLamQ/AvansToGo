@@ -9,7 +9,7 @@ namespace Core.Domain.Services.IRepository
     public interface IPackageRepo
     {
         //Create
-
+        public Task AddPackage(Package package);
         //Read
         IQueryable<Package> GetAll();
         List<Package> GetReservedPackagesBy(Student Student);
