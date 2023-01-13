@@ -7,4 +7,15 @@
 <div class="d-flex flex-row">
     @Model.Id
     <a class="btn btn-primary" asp-area="" asp-controller="Package" asp-action="UpdatePackage" asp-route-id="@Model.Id">EDIT</a>
+    @if(Model.Products == null)
+    {
+       <div>leeg</div>
+    } else
+    {
+        @foreach (var p in @Model.Products)
+        {
+            @p.Name
+        }
+    }
+
 </div>

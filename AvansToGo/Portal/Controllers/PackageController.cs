@@ -1,5 +1,6 @@
 ﻿using Core.Domain;
 using Core.Domain.Services.IRepository;
+using Infrastructure.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -81,13 +82,13 @@ namespace Portal.Controllers
 
         [HttpPost]
         [Authorize(Policy = "EmployeeOnly")]
-        public async Task<ActionResult> CreatePackage(PackageViewModel package)
+        public async Task<ActionResult> CreatePackage(PackageViewModel Package)
         {
             if (ModelState.IsValid)
             {
                 var ProductList = new List<Product>();
                 var ProductDataList = _ProductRepo.GetAll().ToList();
-                foreach (var ProductName in package.Products)
+                foreach (var ProductName in Package.Products)
                 {
                     foreach (var product in ProductDataList)
                     {
@@ -111,25 +112,25 @@ namespace Portal.Controllers
 
                 var NewPackage = new Package
                 {
-                    Name = package.Name,
+                    Name = Package.Name,
                     City = EmployeeCity,
-                    ContainsAlcohol = package.ContainsAlcohol,
-                    Price = package.Price,
-                    Canteen = package.Canteen,
+                    ContainsAlcohol = Package.ContainsAlcohol,
+                    Price = Package.Price,
+                    Canteen = Package.Canteen,
                     CanteenLocation = Employee.CanteenLocation,
                     Products = ProductList,
                     PickUpTimeStart = DateTime.Now,
-                    PickUpTimeEnd = package.PickUpTimeEnd,
-                    Type = package.Type,
-                    ReservedBy = package.ReservedBy,
-                    StudentId = package.StudentId
+                    PickUpTimeEnd = Package.PickUpTimeEnd,
+                    Type = Package.Type,
+                    ReservedBy = Package.ReservedBy,
+                    StudentId = Package.StudentId
                 };
                 await _PackageRepo.AddPackage(NewPackage);
 
                 return View("Index", _PackageRepo.GetUnReservedPackagesFilteredDateAsc());
             }
             ModelState.AddModelError("", "Invalid package");
-            return View(package);
+            return View(Package);
         }
 
         [Authorize(Policy = "EmployeeOnly")]
@@ -197,7 +198,61 @@ namespace Portal.Controllers
                 }
             }
 
-            return View("CreatePackage", Pack);
+            return View("EditPackage", Pack);
+        }
+
+        [Authorize(Policy = "EmployeeOnly")]
+        [HttpPut]
+        public IActionResult UpdatePackage(PackageViewModel Package)
+        {
+            if(ModelState.IsValid)
+            {
+                var ProductList = new List<Product>();
+                var ProductDataList = _ProductRepo.GetAll().ToList();
+                foreach (var ProductName in Package.Products)
+                {
+                    foreach (var product in ProductDataList)
+                    {
+                        if (ProductName.Equals(product.Name))
+                        {
+                            ProductList.Add(product);
+                        }
+                    }
+                }
+
+                var Employee = _EmployeeRepo.GetEmployeeByEmail(User.FindFirstValue(ClaimTypes.Email));
+                var EmployeeCity = EnumCity.Breda;
+                if (Employee.CanteenLocation == "Ld")
+                {
+                    EmployeeCity = EnumCity.Tilburg;
+                }
+                if (Employee.CanteenLocation == "Lc")
+                {
+                    EmployeeCity = EnumCity.DenBosch;
+                }
+
+                var NewPackage = new Package
+                {
+                    Name = Package.Name,
+                    City = EmployeeCity,
+                    ContainsAlcohol = Package.ContainsAlcohol,
+                    Price = Package.Price,
+                    Canteen = Package.Canteen,
+                    CanteenLocation = Employee.CanteenLocation,
+                    Products = ProductList,
+                    PickUpTimeStart = DateTime.Now,
+                    PickUpTimeEnd = Package.PickUpTimeEnd,
+                    Type = Package.Type,
+                    ReservedBy = Package.ReservedBy,
+                    StudentId = Package.StudentId
+                };
+                
+                _PackageRepo.UpdatePackageById(NewPackage);
+
+                return View("Index", _PackageRepo.GetUnReservedPackagesFilteredDateAsc());
+            }
+            ModelState.AddModelError("", "Invalid package");
+            return View(Package);
         }
 
     }

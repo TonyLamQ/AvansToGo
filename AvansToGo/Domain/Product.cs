@@ -9,5 +9,7 @@ namespace Core.Domain
         public string Name { get; set; } = null!;
         public bool ContainsAlcohol { get; set; }
         public string? ImageUrl { get; set; }
+
+        public List<Package>? Packages { get; set; }
     }
 }
