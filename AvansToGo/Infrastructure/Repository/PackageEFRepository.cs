@@ -22,14 +22,25 @@ namespace Infrastructure.Repository
             return _context.Packages;
         }
 
+        public Package GetPackageById(int id)
+        {
+            var package = _context.Packages.Where(p => p.Id == id).First()!;
+            return package;
+        }
+
         public List<Package> GetReservedPackagesBy(Student Student)
         {
-            return _context.Packages.Select(p => p).Where(p => p.ReservedBy == Student).ToList();
+            return _context.Packages.Where(p => p.ReservedBy == Student).ToList();
         }
 
         public List<Package> GetUnReservedPackages()
         {
             return _context.Packages.Select(p=> p).Where(p => p.ReservedBy==null).ToList(); 
+        }
+
+        public List<Package> GetUnReservedPackagesFilteredDateAsc()
+        {
+            return GetUnReservedPackages().OrderBy(p => p.PickUpTimeStart).ToList();
         }
     }
 }

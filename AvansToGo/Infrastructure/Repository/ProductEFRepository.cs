@@ -19,5 +19,10 @@ namespace Infrastructure.Repository
         {
             return _context.Products;
         }
+
+        public List<string> GetAllNames()
+        {
+            return GetAll().Select(x => x.Name).ToList();
+        }
     }
 }

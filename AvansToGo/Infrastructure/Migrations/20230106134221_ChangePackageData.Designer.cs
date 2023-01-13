@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AvansToGoContext))]
-    partial class AvansToGoContextModelSnapshot : ModelSnapshot
+    [Migration("20230106134221_ChangePackageData")]
+    partial class ChangePackageData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,24 +37,24 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Location");
 
-                    b.ToTable("Canteens", (string)null);
+                    b.ToTable("Canteens");
 
                     b.HasData(
                         new
                         {
-                            Location = "La",
+                            Location = "LA200",
                             City = 0,
                             ServesHotMeals = true
                         },
                         new
                         {
-                            Location = "Ld",
+                            Location = "LA300",
                             City = 2,
                             ServesHotMeals = false
                         },
                         new
                         {
-                            Location = "Lc",
+                            Location = "LA400",
                             City = 1,
                             ServesHotMeals = true
                         });
@@ -66,39 +68,26 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"), 1L, 1);
 
-                    b.Property<string>("CanteenLocation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
                         {
                             EmployeeId = 1,
-                            CanteenLocation = "La",
-                            Email = "Employee@gmail.com",
                             UserName = "Tim"
                         });
                 });
 
             modelBuilder.Entity("Core.Domain.Package", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CanteenLocation")
                         .IsRequired()
@@ -109,10 +98,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("ContainsAlcohol")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("PickUpTimeEnd")
                         .HasColumnType("datetime2");
@@ -126,47 +111,44 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
                     b.HasIndex("CanteenLocation");
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Packages", (string)null);
+                    b.ToTable("Packages");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CanteenLocation = "La",
+                            Name = "Test",
+                            CanteenLocation = "LA200",
                             City = 0,
                             ContainsAlcohol = true,
-                            Name = "Test",
-                            PickUpTimeEnd = new DateTime(2023, 1, 23, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6364),
-                            PickUpTimeStart = new DateTime(2023, 1, 10, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6329),
+                            PickUpTimeEnd = new DateTime(2023, 1, 16, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5906),
+                            PickUpTimeStart = new DateTime(2023, 1, 3, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5874),
                             Price = 10.0,
                             StudentId = 1
                         },
                         new
                         {
-                            Id = 2,
-                            CanteenLocation = "Ld",
+                            Name = "Test2",
+                            CanteenLocation = "LA300",
                             City = 2,
                             ContainsAlcohol = false,
-                            Name = "Test2",
-                            PickUpTimeEnd = new DateTime(2023, 1, 17, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6380),
-                            PickUpTimeStart = new DateTime(2023, 1, 11, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6377),
+                            PickUpTimeEnd = new DateTime(2023, 1, 10, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5914),
+                            PickUpTimeStart = new DateTime(2023, 1, 4, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5912),
                             Price = 13.0
                         },
                         new
                         {
-                            Id = 3,
-                            CanteenLocation = "Lc",
+                            Name = "Test3",
+                            CanteenLocation = "LA400",
                             City = 1,
                             ContainsAlcohol = true,
-                            Name = "Test3",
-                            PickUpTimeEnd = new DateTime(2023, 1, 15, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6388),
-                            PickUpTimeStart = new DateTime(2023, 1, 6, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6385),
+                            PickUpTimeEnd = new DateTime(2023, 1, 8, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5919),
+                            PickUpTimeStart = new DateTime(2022, 12, 30, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5918),
                             Price = 14.0
                         });
                 });
@@ -182,14 +164,14 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PackageId")
-                        .HasColumnType("int");
+                    b.Property<string>("PackageName")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Name");
 
-                    b.HasIndex("PackageId");
+                    b.HasIndex("PackageName");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -245,7 +227,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
 
                     b.HasData(
                         new
@@ -298,7 +280,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Domain.Package", null)
                         .WithMany("Products")
-                        .HasForeignKey("PackageId");
+                        .HasForeignKey("PackageName");
                 });
 
             modelBuilder.Entity("Core.Domain.Package", b =>

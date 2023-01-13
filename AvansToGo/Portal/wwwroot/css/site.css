@@ -5,6 +5,18 @@
     --bs-secondary-rgb: 116, 2, 2;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #740202;
+    border-color: #740202;
+}
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #5c0808;
+        border-color: #5c0808;
+    }
+
 html {
   font-size: 14px;
 }

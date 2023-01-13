@@ -30,33 +30,64 @@
         <h1>Breda</h1></><hr />
         @foreach (var package in @Model){
             
-            @if (package.City.Equals(EnumCity.Breda))
+            
+            @if (package.City.Equals(EnumCity.Breda) && package.CanteenLocation.Equals("La"))
             {
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <a asp-area="" asp-controller="Package" asp-action="Details" asp-route-id="@package.Id" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                     <h1><i class="bi bi-box2-heart"></i></h1>
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
                             <h5 class="mb-0">@package.Name</h5>
-                            <p class="mb-0 opacity-75">@package.City</p>
-                            <p class="mb-0 opacity-75">Amount</p>
+                            <p class="mb-0 opacity-75">@package.CanteenLocation</p>
+                            <p class="mb-0 opacity-75"></p>
                         </div>
                         <small class="opacity-50 text-nowrap">DateTime:</small>
                     </div>
                 </a>
             }
+            @if (package.City.Equals(EnumCity.Breda) && package.CanteenLocation.Equals("Ld"))
+            {
+                <a asp-area="" asp-controller="Package" asp-action="Details" asp-route-id="@package.Id" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <h1><i class="bi bi-box2-heart"></i></h1>
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <h5 class="mb-0">@package.Name</h5>
+                            <p class="mb-0 opacity-75">@package.CanteenLocation</p>
+                            <p class="mb-0 opacity-75"></p>
+                        </div>
+                        <small class="opacity-50 text-nowrap">DateTime:</small>
+                    </div>
+                </a>
+            }
+            @if (package.City.Equals(EnumCity.Breda) && !package.CanteenLocation.Equals("Ld") && !package.CanteenLocation.Equals("La"))
+            {
+                <a asp-area="" asp-controller="Package" asp-action="Details" asp-route-id="@package.Id" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <h1><i class="bi bi-box2-heart"></i></h1>
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <h5 class="mb-0">@package.Name</h5>
+                            <p class="mb-0 opacity-75">@package.CanteenLocation</p>
+                            <p class="mb-0 opacity-75"></p>
+                        </div>
+                        <small class="opacity-50 text-nowrap">DateTime:</small>
+                    </div>
+                </a>
+            }
+
         }
+
         <h1 class="pt-4">Tilburg</h1></><hr />
         @foreach (var package in @Model)
         {
 
             @if (package.City.Equals(EnumCity.Tilburg))
             {
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <a asp-area="" asp-controller="Package" asp-action="Details" asp-route-id="@package.Id" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                     <h1><i class="bi bi-box2-heart"></i></h1>
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
                             <h5 class="mb-0">@package.Name</h5>
-                            <p class="mb-0 opacity-75">@package.City</p>
+                            <p class="mb-0 opacity-75">@package.CanteenLocation</p>
                             <p class="mb-0 opacity-75">Amount</p>
                         </div>
                         <small class="opacity-50 text-nowrap">DateTime:</small>
@@ -70,12 +101,12 @@
 
             @if (package.City.Equals(EnumCity.DenBosch))
             {
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <a asp-area="" asp-controller="Package" asp-action="Details" asp-route-id="@package.Id" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                     <h1><i class="bi bi-box2-heart"></i></h1>
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
                             <h5 class="mb-0">@package.Name</h5>
-                            <p class="mb-0 opacity-75">@package.City</p>
+                            <p class="mb-0 opacity-75">@package.CanteenLocation</p>
                             <p class="mb-0 opacity-75">Amount</p>
                         </div>
                         <small class="opacity-50 text-nowrap">DateTime:</small>
@@ -83,7 +114,6 @@
                 </a>
             }
         }
-
 
     </div>
 

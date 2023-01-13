@@ -2,6 +2,7 @@
     ViewData["Title"] = "Home Page";
     //Layout="";
 }
+@using Core.Domain
 @model PackageViewModel
 
 <div class="d-flex flex-row">
@@ -51,35 +52,34 @@
                </div>
             </div>
 
-                        <label asp-for="Products">Select Products</label>
-                            @foreach(var checkbox in @Model.Checkboxes){
-                                <div class="form-check">
-                                <input class="form-check-input"
-                                       name=Products
-                                       type="checkbox" 
-                                       value="@checkbox.Value"
-                                       id="@checkbox.Value.Name" 
-                                       checked="@checkbox.IsChecked">
-                                <label class="form-check-label" for=@checkbox.Value.Name>
-                                    @checkbox.Value.Name
-                                    </label>
-                                </div>
-                            }
- 
+             <label asp-for="Products">Select Products</label>
+                 @foreach(var checkbox in @Model.Checkboxes){
+                     <div class="form-check">
+                     <input class="form-check-input"
+                            name=Products
+                            type="checkbox" 
+                            value="@checkbox.Value"
+                            id="@checkbox.Value" 
+                            checked="@checkbox.IsChecked">
+                     <label class="form-check-label" for=@checkbox.Value>
+                         @checkbox.Value
+                         </label>
+                     </div>
+                 }
+                         
+          </div>
 
-            <div class="col-md-4">
-              <label asp-for="CanteenLocation" class="form-label">Location</label>
-              <input class="form-control" asp-for="CanteenLocation" required placeholder="e.g. Ld105">
-              <div><span asp-validation-for="CanteenLocation" class="text-danger"></span></div>
-            </div>
+          <label asp-for="Type" class="mt-2">Choose a mealtype:</label><br/>
+          <select class="mt-2 mb-1" asp-for="Type">
+              <option  value='@EnumMealType.Bread'>Bread</option>
+              <option value='@EnumMealType.HotMeal'>HotMeal</option>
+              <option value='@EnumMealType.Beverage'>Beverage</option>
+          </select>
 
-@*            <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
-              <div class="invalid-feedback">
-                Zip code required.
-              </div>
-            </div>*@
+          <div class="col-md-4 mt-3">
+              <label asp-for="PickUpTimeEnd" class="form-label">End date</label>
+              <input type="datetime-local" asp-for="PickUpTimeEnd" min="0" required>
+              <div><span asp-validation-for="PickUpTimeEnd" class="text-danger"></span></div>
           </div>
 
           <hr class="my-4">

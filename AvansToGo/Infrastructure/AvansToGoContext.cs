@@ -25,19 +25,19 @@ namespace Infrastructure
                 new Canteen
             {
                 City = EnumCity.Breda,
-                Location = "LA200",
+                Location = "La",
                 ServesHotMeals = true
             },
                 new Canteen
             {
                 City = EnumCity.Tilburg,
-                Location = "LA300",
+                Location = "Ld",
                 ServesHotMeals = false
             },
                 new Canteen
             {
                 City = EnumCity.DenBosch,
-                Location = "LA400",
+                Location = "Lc",
                 ServesHotMeals = true
             }
         };
@@ -51,7 +51,7 @@ namespace Infrastructure
 
             IEnumerable<Employee> Employees = new List<Employee>
             {
-                new Employee{ EmployeeId= 1, UserName="Tim"}
+                new Employee{ EmployeeId= 1, UserName="Tim",  Email="Employee@gmail.com", CanteenLocation="La"}
             };
 
             IEnumerable<Product> Products = new List<Product>
@@ -63,12 +63,40 @@ namespace Infrastructure
             };
 
             IEnumerable<Package> Packages = new List<Package> {
-            new Package { Name = "Test", City = EnumCity.Breda, StudentId= Students.ToList()[0].StudentId, Price = 10.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[0].Location},
-            new Package { Name = "Test2", City = EnumCity.Tilburg, Price = 13.00, ContainsAlcohol = false, CanteenLocation = Canteens.ToList()[1].Location.ToString()},
-            new Package { Name = "Test3", City = EnumCity.DenBosch, Price = 14.00, ContainsAlcohol = true, CanteenLocation = Canteens.ToList()[2].Location.ToString()}
+            new Package { Id= 1,
+                Name = "Test",
+                City = EnumCity.Breda,
+                StudentId= Students.ToList()[0].StudentId,
+                Price = 10.00,
+                ContainsAlcohol = true,
+                CanteenLocation = Canteens.ToList()[0].Location,
+                PickUpTimeStart= DateTime.Now.AddDays(-3),
+                PickUpTimeEnd= DateTime.Now.AddDays(10),
+                
+            },
+            new Package {
+                Id = 2,
+                Name = "Test2",
+                City = Canteens.ToList()[1].City,
+                Price = 13.00,
+                ContainsAlcohol = false,
+                CanteenLocation = Canteens.ToList()[1].Location.ToString(),
+                PickUpTimeStart= DateTime.Now.AddDays(-2),
+                PickUpTimeEnd= DateTime.Now.AddDays(4),
+                Type = EnumMealType.HotMeal,
+            },
+            new Package { Id = 3,
+                Name = "Test3",
+                City = EnumCity.DenBosch,
+                Price = 14.00,
+                ContainsAlcohol = true,
+                CanteenLocation = Canteens.ToList()[2].Location.ToString(),
+                PickUpTimeStart= DateTime.Now.AddDays(-7),
+                PickUpTimeEnd= DateTime.Now.AddDays(2),
+                }
             };
 
-            //Packages.ToList()[0].Products.Add(Products.ToList()[0]);
+            //Packages.ToList()[1].Products.Add(Products.ToList()[0]);
 
             base.OnModelCreating(modelBuilder);
 

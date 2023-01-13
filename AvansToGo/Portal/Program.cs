@@ -40,6 +40,7 @@ builder.Services.ConfigureApplicationCookie(config =>
 builder.Services.AddScoped<IPackageRepo, PackageEFRepository>();
 builder.Services.AddScoped<IStudentRepo, StudentEFRepository>();
 builder.Services.AddScoped<IProductRepo, ProductEFRepository>();
+builder.Services.AddScoped<IEmployeeRepo, EmployeeEFRepository>();
 
 builder.Services.AddControllersWithViews();
 

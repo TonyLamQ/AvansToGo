@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    //Layout="";
+}
+@using Core.Domain
+@model Package
+<div class="d-flex flex-row">
+    @Model.Id
+    <a class="btn btn-primary" asp-area="" asp-controller="Package" asp-action="UpdatePackage" asp-route-id="@Model.Id">EDIT</a>
+</div>

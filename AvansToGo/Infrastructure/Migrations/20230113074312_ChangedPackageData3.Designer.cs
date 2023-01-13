@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AvansToGoContext))]
-    partial class AvansToGoContextModelSnapshot : ModelSnapshot
+    [Migration("20230113074312_ChangedPackageData3")]
+    partial class ChangedPackageData3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Location");
 
-                    b.ToTable("Canteens", (string)null);
+                    b.ToTable("Canteens");
 
                     b.HasData(
                         new
@@ -80,7 +82,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
@@ -132,7 +134,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Packages", (string)null);
+                    b.ToTable("Packages");
 
                     b.HasData(
                         new
@@ -189,7 +191,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PackageId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -245,7 +247,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
 
                     b.HasData(
                         new

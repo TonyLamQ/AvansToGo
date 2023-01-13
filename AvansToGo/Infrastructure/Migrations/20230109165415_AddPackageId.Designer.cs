@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AvansToGoContext))]
-    partial class AvansToGoContextModelSnapshot : ModelSnapshot
+    [Migration("20230109165415_AddPackageId")]
+    partial class AddPackageId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Location");
 
-                    b.ToTable("Canteens", (string)null);
+                    b.ToTable("Canteens");
 
                     b.HasData(
                         new
@@ -80,7 +82,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
@@ -132,7 +134,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Packages", (string)null);
+                    b.ToTable("Packages");
 
                     b.HasData(
                         new
@@ -142,8 +144,8 @@ namespace Infrastructure.Migrations
                             City = 0,
                             ContainsAlcohol = true,
                             Name = "Test",
-                            PickUpTimeEnd = new DateTime(2023, 1, 23, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6364),
-                            PickUpTimeStart = new DateTime(2023, 1, 10, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6329),
+                            PickUpTimeEnd = new DateTime(2023, 1, 19, 17, 54, 15, 571, DateTimeKind.Local).AddTicks(5770),
+                            PickUpTimeStart = new DateTime(2023, 1, 6, 17, 54, 15, 571, DateTimeKind.Local).AddTicks(5736),
                             Price = 10.0,
                             StudentId = 1
                         },
@@ -154,8 +156,8 @@ namespace Infrastructure.Migrations
                             City = 2,
                             ContainsAlcohol = false,
                             Name = "Test2",
-                            PickUpTimeEnd = new DateTime(2023, 1, 17, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6380),
-                            PickUpTimeStart = new DateTime(2023, 1, 11, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6377),
+                            PickUpTimeEnd = new DateTime(2023, 1, 13, 17, 54, 15, 571, DateTimeKind.Local).AddTicks(5777),
+                            PickUpTimeStart = new DateTime(2023, 1, 7, 17, 54, 15, 571, DateTimeKind.Local).AddTicks(5776),
                             Price = 13.0
                         },
                         new
@@ -165,8 +167,8 @@ namespace Infrastructure.Migrations
                             City = 1,
                             ContainsAlcohol = true,
                             Name = "Test3",
-                            PickUpTimeEnd = new DateTime(2023, 1, 15, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6388),
-                            PickUpTimeStart = new DateTime(2023, 1, 6, 8, 43, 11, 820, DateTimeKind.Local).AddTicks(6385),
+                            PickUpTimeEnd = new DateTime(2023, 1, 11, 17, 54, 15, 571, DateTimeKind.Local).AddTicks(5783),
+                            PickUpTimeStart = new DateTime(2023, 1, 2, 17, 54, 15, 571, DateTimeKind.Local).AddTicks(5781),
                             Price = 14.0
                         });
                 });
@@ -189,7 +191,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PackageId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -245,7 +247,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
 
                     b.HasData(
                         new

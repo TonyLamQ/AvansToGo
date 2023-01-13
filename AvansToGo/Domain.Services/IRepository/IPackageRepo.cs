@@ -14,8 +14,11 @@ namespace Core.Domain.Services.IRepository
         IQueryable<Package> GetAll();
         List<Package> GetReservedPackagesBy(Student Student);
         List<Package> GetUnReservedPackages();
-        //Update
+        List<Package> GetUnReservedPackagesFilteredDateAsc();
 
+        Package GetPackageById(int id);
+        //Update
+        
         //Delete
     }
 }

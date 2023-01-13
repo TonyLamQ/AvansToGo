@@ -6,6 +6,6 @@ namespace Portal.Models
     {
         public bool IsChecked { get; set; }
 
-        public Product Value { get; set; } = null!;
+        public string Value { get; set; } = null!;
     }
 }

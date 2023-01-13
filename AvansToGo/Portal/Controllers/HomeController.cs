@@ -39,7 +39,7 @@ namespace Portal.Controllers
         }
 
         [Authorize(Policy = "StudentOnly")]
-        public IActionResult ReservePacakge(Package package)
+        public IActionResult ReservePackage(Package package)
         {
             var Student = _StudentRepo.GetStudentByEmail(User.FindFirstValue(ClaimTypes.Email));
             //Insert UpdatePackageReservedBy
