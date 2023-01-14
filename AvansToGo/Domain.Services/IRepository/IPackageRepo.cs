@@ -18,7 +18,7 @@ namespace Core.Domain.Services.IRepository
 
         Package GetPackageById(int id);
         //Update
-        void UpdatePackageById(Package NewPackage);
+        Package UpdatePackageById(Package NewPackage);
         //Delete
         void DeletePackageById(int id);
     }

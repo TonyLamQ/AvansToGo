@@ -9,13 +9,31 @@
     color: #fff;
     background-color: #740202;
     border-color: #740202;
+    box-shadow: none;
 }
 
-    .btn-primary:hover {
+    .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .dropdown-toggle:hover, .show > .btn-primary.dropdown-toggle {
         color: #fff;
+        border-block-color: #5c0808;
         background-color: #5c0808;
-        border-color: #5c0808;
+        box-shadow: none;
+        outline: none;
     }
+
+/*.btn-secondary {
+    color: #fff;
+    border-block-color: #30730A;
+    background-color: #30730A;
+}
+
+    .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
+        color: #fff;
+        border-block-color: #1A4004;
+        background-color: #1A4004;
+        box-shadow: none;
+    }*/
+
+
 
 html {
   font-size: 14px;

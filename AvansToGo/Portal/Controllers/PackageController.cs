@@ -47,6 +47,14 @@ namespace Portal.Controllers
         }
 
         [Authorize(Policy = "EmployeeOnly")]
+        [HttpPost]
+        public  IActionResult DeletePackage(int id)
+        {
+            _PackageRepo.DeletePackageById(id);
+            return View("Index", _PackageRepo.GetUnReservedPackagesFilteredDateAsc());
+        }
+
+        [Authorize(Policy = "EmployeeOnly")]
         public IActionResult CreatePackage()
         {
             var Pack = new PackageViewModel();
@@ -138,7 +146,7 @@ namespace Portal.Controllers
         {
             var Prod = _ProductRepo.GetAll().ToList();
             var ThisPackage = _PackageRepo.GetPackageById(id);
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAA" + ThisPackage.Products);
+
             var ContainedProductNames = new List<string>();
 
             if(ThisPackage.Products != null && ThisPackage.Products.Count != 0)
@@ -202,8 +210,8 @@ namespace Portal.Controllers
         }
 
         [Authorize(Policy = "EmployeeOnly")]
-        [HttpPut]
-        public IActionResult UpdatePackage(PackageViewModel Package)
+        [HttpPost]
+        public async Task<ActionResult> UpdatePackage(PackageViewModel Package)
         {
             if(ModelState.IsValid)
             {
@@ -233,6 +241,7 @@ namespace Portal.Controllers
 
                 var NewPackage = new Package
                 {
+                    Id= Package.Id,
                     Name = Package.Name,
                     City = EmployeeCity,
                     ContainsAlcohol = Package.ContainsAlcohol,
@@ -247,13 +256,13 @@ namespace Portal.Controllers
                     StudentId = Package.StudentId
                 };
                 
-                _PackageRepo.UpdatePackageById(NewPackage);
+              
+                var CurrentPackage = _PackageRepo.UpdatePackageById(NewPackage);
 
-                return View("Index", _PackageRepo.GetUnReservedPackagesFilteredDateAsc());
+                return View("Details", CurrentPackage);
             }
             ModelState.AddModelError("", "Invalid package");
-            return View(Package);
+            return View("Index", _PackageRepo.GetUnReservedPackages());
         }
-
     }
 }

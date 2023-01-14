@@ -47,9 +47,9 @@ namespace Infrastructure.Repository
         }
 
         //Update
-        public async void UpdatePackageById(Package NewPackage)
+        public Package UpdatePackageById(Package NewPackage)
         {
-            var CurrentPackage = _context.Packages.Find(NewPackage.Id);
+            var CurrentPackage = _context.Packages.Include(x => x.Products).Where(x=> x.Id==NewPackage.Id).First();
 
             CurrentPackage.Name = NewPackage.Name;
             CurrentPackage.City = NewPackage.City;
@@ -65,6 +65,8 @@ namespace Infrastructure.Repository
             CurrentPackage.StudentId = NewPackage.StudentId;
 
             _context.SaveChanges();
+
+            return CurrentPackage;
         }
 
         //Delete
