@@ -15,10 +15,12 @@ namespace Core.Domain.Services.IRepository
         List<Package> GetReservedPackagesBy(Student Student);
         List<Package> GetUnReservedPackages();
         List<Package> GetUnReservedPackagesFilteredDateAsc();
-
         Package GetPackageById(int id);
         //Update
         Package UpdatePackageById(Package NewPackage);
+        bool AddReservedById(int UserId, int PackageId);
+
+        void AddUnreservedById(int UserId, int PackageId);
         //Delete
         void DeletePackageById(int id);
     }

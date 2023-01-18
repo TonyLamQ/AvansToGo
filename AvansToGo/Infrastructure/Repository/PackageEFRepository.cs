@@ -69,11 +69,52 @@ namespace Infrastructure.Repository
             return CurrentPackage;
         }
 
+        public bool AddReservedById(int UserId, int PackageId)
+        {
+            var Bool = true;
+            var Package = _context.Packages.Find(PackageId);
+            var student = _context.Students.Find(UserId);
+            if(Package!.ReservedBy == null)
+            {
+                if (Package.ContainsAlcohol)
+                {
+                    var age = Package.PickUpTimeStart.Value.Year - student.BirthDate.Year;
+                    if (age >=18)
+                    {
+                        Package!.ReservedBy = student;
+                    } else
+                    {
+                        Bool = false;
+                    }
+                } else
+                {
+                    Package!.ReservedBy = student;
+                }
+
+            } else
+            {
+                Bool = false;
+            }
+           
+            _context.SaveChanges();
+            return Bool;
+
+        }
+
+        public void AddUnreservedById(int UserId, int PackageId)
+        {
+            var Package = _context.Packages.Find(PackageId);
+
+            Package!.ReservedBy = null;
+
+            _context.SaveChanges();
+        }
+
         //Delete
         public void DeletePackageById(int id)
         {
             var Package = _context.Packages.Find(id);
-            _context.Packages.Remove(Package);
+            _context.Packages.Remove(Package!);
             _context.SaveChanges();
         }
      

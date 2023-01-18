@@ -6,20 +6,20 @@
 @model PackageViewModel
 
 <div class="d-flex flex-row">
-    <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
+    <div class="d-flex flex-column flex-shrink-0 bg-primary" style="width: 4.5rem; height:100vh">
         @*    <a href="/" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
         <svg class="bi pe-none" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
         <span class="visually-hidden">Icon-only</span>
         </a>*@
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li class="nav-item">
-                <a asp-area="" asp-controller="Package" asp-action="Index" class="nav-link py-3 border-bottom rounded-0" title="All packages" data-bs-toggle="tooltip" data-bs-placement="right">
+                <a asp-area="" asp-controller="Package" asp-action="Index" class="nav-link py-3 text-white border-bottom rounded-0" title="All packages" data-bs-toggle="tooltip" data-bs-placement="right">
                     @*           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home" /></svg>*@
                     <i class="bi bi-list-ul"></i>
                 </a>
             </li>
             <li>
-                <a asp-area="" asp-controller="Package" asp-action="CreatePackage" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Add packages" data-bs-toggle="tooltip" data-bs-placement="right">
+                <a asp-area="" asp-controller="Package" asp-action="CreatePackage" class="nav-link text-white bg-secondary py-3 border-bottom rounded-0" aria-current="page" title="Add packages" data-bs-toggle="tooltip" data-bs-placement="right">
                     @*       <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2" /></svg>*@
                     <i class="bi bi-plus-circle"></i>
                 </a>
@@ -74,12 +74,17 @@
           
           </div>
 
-          <label asp-for="Type" class="mt-2">Choose a mealtype:</label><br/>
-          <select class="mt-2 mb-1" asp-for="Type">
-              <option  value='@EnumMealType.Bread'>Bread</option>
+          <select class="mt-2 mb-1" asp-for="Type" id="Type" name="Type">
+              <option value='@EnumMealType.Bread'>Bread</option>
               <option value='@EnumMealType.HotMeal'>HotMeal</option>
               <option value='@EnumMealType.Beverage'>Beverage</option>
           </select>
+
+          <div class="col-md-4 mt-3">
+              <label asp-for="PickUpTimeStart" class="form-label">Begin date</label>
+              <input type="datetime-local" asp-for="PickUpTimeStart" required>
+              <div><span asp-validation-for="PickUpTimeStart" class="text-danger"></span></div>
+          </div>
 
           <div class="col-md-4 mt-3">
               <label asp-for="PickUpTimeEnd" class="form-label">End date</label>
@@ -100,6 +105,5 @@
         </form>
       </div>
     </div>
-
     </div>
 </div>

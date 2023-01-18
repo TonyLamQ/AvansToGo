@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AvansToGoContext))]
-    partial class AvansToGoContextModelSnapshot : ModelSnapshot
+    [Migration("20230117212719_ChangedPackageVariables")]
+    partial class ChangedPackageVariables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,8 +147,8 @@ namespace Infrastructure.Migrations
                             City = 0,
                             ContainsAlcohol = true,
                             Name = "Test",
-                            PickUpTimeEnd = new DateTime(2023, 1, 28, 15, 35, 35, 634, DateTimeKind.Local).AddTicks(5257),
-                            PickUpTimeStart = new DateTime(2023, 1, 15, 15, 35, 35, 634, DateTimeKind.Local).AddTicks(5219),
+                            PickUpTimeEnd = new DateTime(2023, 1, 27, 22, 27, 19, 31, DateTimeKind.Local).AddTicks(8907),
+                            PickUpTimeStart = new DateTime(2023, 1, 14, 22, 27, 19, 31, DateTimeKind.Local).AddTicks(8878),
                             Price = 10.0,
                             StudentId = 1,
                             Type = 0
@@ -158,8 +160,8 @@ namespace Infrastructure.Migrations
                             City = 2,
                             ContainsAlcohol = false,
                             Name = "Test2",
-                            PickUpTimeEnd = new DateTime(2023, 1, 22, 15, 35, 35, 634, DateTimeKind.Local).AddTicks(5270),
-                            PickUpTimeStart = new DateTime(2023, 1, 16, 15, 35, 35, 634, DateTimeKind.Local).AddTicks(5267),
+                            PickUpTimeEnd = new DateTime(2023, 1, 21, 22, 27, 19, 31, DateTimeKind.Local).AddTicks(8916),
+                            PickUpTimeStart = new DateTime(2023, 1, 15, 22, 27, 19, 31, DateTimeKind.Local).AddTicks(8914),
                             Price = 13.0,
                             Type = 1
                         },
@@ -170,8 +172,8 @@ namespace Infrastructure.Migrations
                             City = 1,
                             ContainsAlcohol = true,
                             Name = "Test3",
-                            PickUpTimeEnd = new DateTime(2023, 1, 20, 15, 35, 35, 634, DateTimeKind.Local).AddTicks(5278),
-                            PickUpTimeStart = new DateTime(2023, 1, 11, 15, 35, 35, 634, DateTimeKind.Local).AddTicks(5276),
+                            PickUpTimeEnd = new DateTime(2023, 1, 19, 22, 27, 19, 31, DateTimeKind.Local).AddTicks(8922),
+                            PickUpTimeStart = new DateTime(2023, 1, 10, 22, 27, 19, 31, DateTimeKind.Local).AddTicks(8920),
                             Price = 14.0,
                             Type = 0
                         });

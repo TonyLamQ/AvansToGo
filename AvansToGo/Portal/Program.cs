@@ -19,9 +19,9 @@ builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(u
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(config =>
 {
     config.Password.RequiredLength = 4;
-    config.Password.RequireDigit = false;
-    config.Password.RequireNonAlphanumeric = false;
-    config.Password.RequireUppercase = false;
+    config.Password.RequireDigit = true;
+    config.Password.RequireNonAlphanumeric = true;
+    config.Password.RequireUppercase = true;
 })
     .AddEntityFrameworkStores<IdentityContext>();
 
@@ -41,6 +41,7 @@ builder.Services.AddScoped<IPackageRepo, PackageEFRepository>();
 builder.Services.AddScoped<IStudentRepo, StudentEFRepository>();
 builder.Services.AddScoped<IProductRepo, ProductEFRepository>();
 builder.Services.AddScoped<IEmployeeRepo, EmployeeEFRepository>();
+builder.Services.AddScoped<ICanteenRepo, CanteenEFRepository>();
 
 builder.Services.AddControllersWithViews();
 

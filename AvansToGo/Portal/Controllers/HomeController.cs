@@ -10,18 +10,15 @@ namespace Portal.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IPackageRepo _PackageRepo;
         private readonly IStudentRepo _StudentRepo;
 
 
         public HomeController(
-            ILogger<HomeController> logger,
             IPackageRepo PackageRepo,
              IStudentRepo StudentRepo
             )
         {
-            _logger = logger;
             _PackageRepo = PackageRepo;
             _StudentRepo = StudentRepo;
 
@@ -31,27 +28,55 @@ namespace Portal.Controllers
         {
             return View(_PackageRepo.GetUnReservedPackages());
         }
-        [Authorize(Policy = "StudentOnly")]
-        public IActionResult List()
+        public IActionResult PackageDetails(int id)
         {
-            var Student = _StudentRepo.GetStudentByEmail(User.FindFirstValue(ClaimTypes.Email));
-            return View("Index", _PackageRepo.GetReservedPackagesBy(Student));
+            return View(_PackageRepo.GetPackageById(id));
         }
 
         [Authorize(Policy = "StudentOnly")]
-        public IActionResult ReservePackage(Package package)
+        [HttpPost]
+        public IActionResult ReservePackage(int id)
         {
             var Student = _StudentRepo.GetStudentByEmail(User.FindFirstValue(ClaimTypes.Email));
-            //Insert UpdatePackageReservedBy
-            
-            //ToDo: Input SUcceeded PopUp
-            return View();
-        }
+            if (Student != null)
+            {
+                var succeeded = _PackageRepo.AddReservedById(Student.StudentId, id);
+                if (!succeeded)
+                {
+                    TempData["AlertMessage"] = "This package has already been reserved.";
+                    return View("Index", _PackageRepo.GetUnReservedPackages());
+                }
+            }
+            else
+            {
+                TempData["AlertMessage"] = "You are not logged in.";
+                return View("Index", _PackageRepo.GetUnReservedPackages());
+            }
 
+            return View("Index", _PackageRepo.GetUnReservedPackages());
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        //TestingMethods
+        public bool AddReservedById(int PackageId)
+        {
+            //var email = User.FindFirstValue(ClaimTypes.Email);
+            var email = "Student@gmail.com";
+            var Student = _StudentRepo.GetStudentByEmail(email);
+            if (Student != null)
+            {
+                var succeeded = _PackageRepo.AddReservedById(Student.StudentId, PackageId);
+                if (!succeeded)
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

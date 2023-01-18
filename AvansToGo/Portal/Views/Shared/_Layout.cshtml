@@ -20,15 +20,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <ul class="navbar-nav ms-2 me-auto mb-2 mb-md-0 gap-2">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (User.HasClaim(c => c.Type == "Student"))
+                        {
+                            <li>
+                                <a class="nav-link active" asp-area="" asp-controller="Package" asp-action="MyPackages">My Packages</a>
+                            </li>
+                        }
 @*                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
+                            <a class="nav-link disabled">Disabled</a>a
                         </li>*@
                     </ul>
 @*                    <div class="d-flex me-4" >
@@ -43,7 +46,10 @@
                             @if (User.HasClaim(c => c.Type =="Employee")){
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="Index">Packages</a></li>
                             }
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            @if (User.HasClaim(c => c.Type =="Student")){
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="MyPackages">My Packages</a></li>
+                            }
+                           
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             @if (User.FindFirstValue(ClaimTypes.Email) == null)
@@ -67,11 +73,11 @@
         </nav>
     </header>
 
-        <main role="main" class="mb-5">
+        <main role="main" class="pb-0">
             @RenderBody()
         </main>
 
-    <footer class="bg-primary text-center text-white footer">
+    <footer class="text-center text-white footer">
         <!-- Grid container -->
         <div class="container pb-0">
             <!-- Section: Social media -->

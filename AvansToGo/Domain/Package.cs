@@ -15,7 +15,7 @@ namespace Core.Domain
         public List<Product> Products { get; set; } = null!;
         public DateTime? PickUpTimeStart { get; set; }
         public DateTime? PickUpTimeEnd { get; set; }
-        public EnumMealType Type;
+        public EnumMealType Type { get; set; }
         public Student? ReservedBy { get; set; }
         public int? StudentId { get; set; }
     }

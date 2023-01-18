@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    //Layout="";
+}
+@using Core.Domain
+@model Package
+
+<div class="container d-flex flex-column">
+    <div class="mt-5">
+        <a class="text-black text-opacity-50" style="text-decoration:none" asp-action="MyPackages" asp-controller="Package"><i class="bi bi-arrow-left h2">Return</i></a>
+    </div>
+    <div class="container d-flex flex-row" style="height:65vh; margin-left:150px">
+        <div class="container d-flex flex-column justify-content-center align-items-start">
+
+            <div class="h1">
+                Package Name: @Model.Name
+                @if (Model.ContainsAlcohol == true)
+                {
+
+                    <div class="h3">
+                        Price: € @Model.Price
+                    </div>
+                    <div class="h3 text-primary">
+                        [18+]
+                    </div>
+                }
+            </div>
+            <div class="text-muted mb-5" style="font-size:18px">
+                PickupDate: From [@Model.PickUpTimeStart] to [@Model.PickUpTimeEnd]
+            </div>
+            <div class="h3 text-decoration-underline">
+                Details:
+            </div>
+            <div class="container d-flex flex-column justify-content-center align-items-start ms-2 mt-3 h5">
+                <div class="">
+                    ● City: @Model.City
+                </div>
+
+                <div class="">
+                    ● Location: @Model.CanteenLocation
+                </div>
+
+                <div class="">
+                    ● Package type: @Model.Type
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container d-flex flex-column justify-content-center align-items-start" style="margin-bottom:120px">
+
+            <div class="h2 mb-3">
+                Products:
+            </div>
+            @if (@Model.Products == null || @Model.Products.Count == 0)
+            {
+                <div>There are no products in this package.</div>
+            }
+            else
+            {
+                @foreach (var p in @Model.Products)
+                {
+                    <div class="h5 ms-3">
+                        - @p.Name
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

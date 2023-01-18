@@ -60,21 +60,33 @@
 @*----------------------------*@
 @*Begin of code for cards*@
 
-<div class="dropdown">
-    <button class="btn btn-primary shadow-none dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">All Packages</a>
-        @if (User.HasClaim(c => c.Type == "Student"))
-        {
-            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="List">My Packages</a>
-        }
-    </div>
-</div>
-
- <div class="album py-5">
+ <div class="album pb-5">
     <div class="container">
+
+        <div class="h2">
+            Packages:
+        </div>
+
+        <div class="dropdown my-2">
+            <button class="btn btn-primary shadow-none dropdown-toggle" style="margin-left:0px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">All Packages</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">All Packages</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">All Packages</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">All Packages</a>
+            </div>
+        </div>
+
+        @if(TempData["AlertMessage"] != null)
+        {
+            <div class="alert alert-warning">
+                <b>Error:</b>@TempData["AlertMessage"]
+            </div>
+        }
+
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           @*Input Code for-loop items*@
                 @foreach (var package in @Model)
@@ -103,8 +115,16 @@
 
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add</button>
+                                        <form asp-area="" asp-controller="Home" asp-action="PackageDetails" asp-route-id="@package.Id" method="post">
+                                            <input type="submit" class="btn btn-sm btn-outline-secondary" value="View" />
+                                        </form>
+
+                   
+
+                                        <form asp-area="" asp-controller="Home" asp-action="ReservePackage" asp-route-id="@package.Id" method="post">
+                                            <input type="submit" class="btn btn-sm btn-outline-secondary" value="Add" />
+                                        </form>
+
                                     </div>
                                 <small class="text-muted">Price: €@package.Price</small>
                                 </div>
@@ -112,7 +132,6 @@
                         </div>
                     </div>
                 }
-          
       </div>
     </div>
  </div>

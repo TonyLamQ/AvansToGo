@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Portal.Models
 {
@@ -14,7 +15,7 @@ namespace Portal.Models
         public List<string> Products { get; set; } = null!;
         public DateTime? PickUpTimeStart { get; set; }
         public DateTime? PickUpTimeEnd { get; set; }
-        public EnumMealType Type;
+        public EnumMealType Type { get; set; }
         public Student? ReservedBy { get; set; }
         public int? StudentId { get; set; }
 

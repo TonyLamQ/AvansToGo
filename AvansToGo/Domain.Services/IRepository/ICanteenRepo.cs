@@ -8,5 +8,13 @@ namespace Core.Domain.Services.IRepository
 {
     public interface ICanteenRepo
     {
+        //Create
+
+        //Read
+        IQueryable<Canteen> GetAll();
+        bool ServesHotMeals(string Location);
+        //Update
+
+        //Delete
     }
 }

@@ -82,6 +82,12 @@
           </select>
 
           <div class="col-md-4 mt-3">
+              <label asp-for="PickUpTimeStart" class="form-label">Begin date</label>
+                        <input type="datetime-local" asp-for="PickUpTimeStart" required>
+                        <div><span asp-validation-for="PickUpTimeStart" class="text-danger"></span></div>
+          </div>
+
+          <div class="col-md-4 mt-3">
               <label asp-for="PickUpTimeEnd" class="form-label">End date</label>
               <input type="datetime-local" asp-for="PickUpTimeEnd" min="0" required>
               <div><span asp-validation-for="PickUpTimeEnd" class="text-danger"></span></div>
