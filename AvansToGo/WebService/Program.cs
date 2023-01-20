@@ -9,12 +9,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddSwaggerGen(char=>
 //{
-    
+
 //})
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
@@ -49,6 +50,9 @@ builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.Authenticati
 builder.Services.AddControllers();
 builder.Services.AddMvc();
 builder.Services.AddRazorPages();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
