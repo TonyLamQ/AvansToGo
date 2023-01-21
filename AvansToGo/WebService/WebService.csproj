@@ -5,7 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
+	<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
   <ItemGroup>
     <PackageReference Include="HotChocolate.AspNetCore" Version="12.16.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.5" />
