@@ -69,32 +69,21 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UsePlayground(new PlaygroundOptions
-    {
-        QueryPath="/api",
-        Path="/playground"
-    });
-    //app.UseGraphQL("/api");
-    app.UseRouting();
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
 
-    app.UseHttpsRedirection();
-    app.UseAuthentication();
-    app.UseAuthorization();
+//app.UseGraphQL("/api");
+app.UseRouting();
 
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapGet("/playground", async context =>
-        {
-            await context.Response.WriteAsync("Hello World!");
-        });
-        endpoints.MapGraphQL();
-    });
+//    app.UseHttpsRedirection();
+//    app.UseAuthentication();
+//    app.UseAuthorization();
 
-}
+
+
+//}
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -103,7 +92,21 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapGraphQL();
+app.UsePlayground(new PlaygroundOptions
+{
+    QueryPath = "/api",
+    Path = "/playground"
+});
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("/playground", async context =>
+    {
+        await context.Response.WriteAsync("Hello World!");
+    });
+    endpoints.MapGraphQL();
+});
+//app.MapGraphQL();
 app.MapControllers();
 
 app.Run();
