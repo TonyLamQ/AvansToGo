@@ -145,8 +145,8 @@ namespace Infrastructure.Migrations
                             City = 0,
                             ContainsAlcohol = true,
                             Name = "Test",
-                            PickUpTimeEnd = new DateTime(2023, 1, 31, 14, 9, 14, 886, DateTimeKind.Local).AddTicks(8637),
-                            PickUpTimeStart = new DateTime(2023, 1, 18, 14, 9, 14, 886, DateTimeKind.Local).AddTicks(8603),
+                            PickUpTimeEnd = new DateTime(2023, 1, 31, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2393),
+                            PickUpTimeStart = new DateTime(2023, 1, 18, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2366),
                             Price = 10.0,
                             StudentId = 1,
                             Type = 0
@@ -158,8 +158,8 @@ namespace Infrastructure.Migrations
                             City = 2,
                             ContainsAlcohol = false,
                             Name = "Test2",
-                            PickUpTimeEnd = new DateTime(2023, 1, 25, 14, 9, 14, 886, DateTimeKind.Local).AddTicks(8647),
-                            PickUpTimeStart = new DateTime(2023, 1, 19, 14, 9, 14, 886, DateTimeKind.Local).AddTicks(8645),
+                            PickUpTimeEnd = new DateTime(2023, 1, 25, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2402),
+                            PickUpTimeStart = new DateTime(2023, 1, 19, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2400),
                             Price = 13.0,
                             Type = 1
                         },
@@ -170,8 +170,8 @@ namespace Infrastructure.Migrations
                             City = 1,
                             ContainsAlcohol = true,
                             Name = "Test3",
-                            PickUpTimeEnd = new DateTime(2023, 1, 23, 14, 9, 14, 886, DateTimeKind.Local).AddTicks(8653),
-                            PickUpTimeStart = new DateTime(2023, 1, 14, 14, 9, 14, 886, DateTimeKind.Local).AddTicks(8651),
+                            PickUpTimeEnd = new DateTime(2023, 1, 23, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2407),
+                            PickUpTimeStart = new DateTime(2023, 1, 14, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2406),
                             Price = 14.0,
                             Type = 0
                         });

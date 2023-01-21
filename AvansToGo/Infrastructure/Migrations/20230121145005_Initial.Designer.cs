@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AvansToGoContext))]
-    [Migration("20230106134221_ChangePackageData")]
-    partial class ChangePackageData
+    [Migration("20230121145005_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,19 +42,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Location = "LA200",
+                            Location = "La",
                             City = 0,
                             ServesHotMeals = true
                         },
                         new
                         {
-                            Location = "LA300",
+                            Location = "Ld",
                             City = 2,
                             ServesHotMeals = false
                         },
                         new
                         {
-                            Location = "LA400",
+                            Location = "Lc",
                             City = 1,
                             ServesHotMeals = true
                         });
@@ -68,6 +68,14 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"), 1L, 1);
 
+                    b.Property<string>("CanteenLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -80,14 +88,19 @@ namespace Infrastructure.Migrations
                         new
                         {
                             EmployeeId = 1,
+                            CanteenLocation = "La",
+                            Email = "Employee@gmail.com",
                             UserName = "Tim"
                         });
                 });
 
             modelBuilder.Entity("Core.Domain.Package", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CanteenLocation")
                         .IsRequired()
@@ -98,6 +111,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("ContainsAlcohol")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("PickUpTimeEnd")
                         .HasColumnType("datetime2");
@@ -111,7 +128,10 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.HasKey("Name");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CanteenLocation");
 
@@ -122,34 +142,40 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Name = "Test",
-                            CanteenLocation = "LA200",
+                            Id = 1,
+                            CanteenLocation = "La",
                             City = 0,
                             ContainsAlcohol = true,
-                            PickUpTimeEnd = new DateTime(2023, 1, 16, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5906),
-                            PickUpTimeStart = new DateTime(2023, 1, 3, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5874),
+                            Name = "Test",
+                            PickUpTimeEnd = new DateTime(2023, 1, 31, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2393),
+                            PickUpTimeStart = new DateTime(2023, 1, 18, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2366),
                             Price = 10.0,
-                            StudentId = 1
+                            StudentId = 1,
+                            Type = 0
                         },
                         new
                         {
-                            Name = "Test2",
-                            CanteenLocation = "LA300",
+                            Id = 2,
+                            CanteenLocation = "Ld",
                             City = 2,
                             ContainsAlcohol = false,
-                            PickUpTimeEnd = new DateTime(2023, 1, 10, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5914),
-                            PickUpTimeStart = new DateTime(2023, 1, 4, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5912),
-                            Price = 13.0
+                            Name = "Test2",
+                            PickUpTimeEnd = new DateTime(2023, 1, 25, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2402),
+                            PickUpTimeStart = new DateTime(2023, 1, 19, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2400),
+                            Price = 13.0,
+                            Type = 1
                         },
                         new
                         {
-                            Name = "Test3",
-                            CanteenLocation = "LA400",
+                            Id = 3,
+                            CanteenLocation = "Lc",
                             City = 1,
                             ContainsAlcohol = true,
-                            PickUpTimeEnd = new DateTime(2023, 1, 8, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5919),
-                            PickUpTimeStart = new DateTime(2022, 12, 30, 14, 42, 20, 756, DateTimeKind.Local).AddTicks(5918),
-                            Price = 14.0
+                            Name = "Test3",
+                            PickUpTimeEnd = new DateTime(2023, 1, 23, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2407),
+                            PickUpTimeStart = new DateTime(2023, 1, 14, 15, 50, 5, 134, DateTimeKind.Local).AddTicks(2406),
+                            Price = 14.0,
+                            Type = 0
                         });
                 });
 
@@ -164,12 +190,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PackageName")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Name");
-
-                    b.HasIndex("PackageName");
 
                     b.ToTable("Products");
 
@@ -259,6 +280,21 @@ namespace Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PackageProduct", b =>
+                {
+                    b.Property<int>("PackagesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductsName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PackagesId", "ProductsName");
+
+                    b.HasIndex("ProductsName");
+
+                    b.ToTable("PackageProduct");
+                });
+
             modelBuilder.Entity("Core.Domain.Package", b =>
                 {
                     b.HasOne("Core.Domain.Canteen", "Canteen")
@@ -276,16 +312,19 @@ namespace Infrastructure.Migrations
                     b.Navigation("ReservedBy");
                 });
 
-            modelBuilder.Entity("Core.Domain.Product", b =>
+            modelBuilder.Entity("PackageProduct", b =>
                 {
                     b.HasOne("Core.Domain.Package", null)
-                        .WithMany("Products")
-                        .HasForeignKey("PackageName");
-                });
+                        .WithMany()
+                        .HasForeignKey("PackagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Core.Domain.Package", b =>
-                {
-                    b.Navigation("Products");
+                    b.HasOne("Core.Domain.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Domain.Student", b =>
