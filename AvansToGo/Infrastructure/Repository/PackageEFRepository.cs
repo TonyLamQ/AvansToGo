@@ -14,10 +14,11 @@ namespace Infrastructure.Repository
             _context = context;
         }
         //Create
-        public async Task AddPackage(Package package)
+        public async Task<Package> AddPackage(Package package)
         {
             _context.Packages.Add(package);            
             await _context.SaveChangesAsync();
+            return package;
         }
         //Read
         public IQueryable<Package> GetAll()
@@ -26,8 +27,12 @@ namespace Infrastructure.Repository
         }
 
         public Package GetPackageById(int id)
-        {
-            var package = _context.Packages.Include(x=>x.Products).Where(p => p.Id == id).First()!;
+        {   
+            var package = _context.Packages.Include(x=>x.Products).Where(p => p.Id == id).FirstOrDefault();
+            if (package == null)
+            {
+                return null;
+            }
             return package;
         }
 
@@ -51,18 +56,18 @@ namespace Infrastructure.Repository
         {
             var CurrentPackage = _context.Packages.Include(x => x.Products).Where(x=> x.Id==NewPackage.Id).First();
 
-            CurrentPackage.Name = NewPackage.Name;
+            CurrentPackage.Name = NewPackage.Name ?? CurrentPackage.Name;
             CurrentPackage.City = NewPackage.City;
             CurrentPackage.ContainsAlcohol = NewPackage.ContainsAlcohol;
-            CurrentPackage.Price = NewPackage.Price;
-            CurrentPackage.Canteen = NewPackage.Canteen;
-            CurrentPackage.CanteenLocation = NewPackage.CanteenLocation;
-            CurrentPackage.Products = NewPackage.Products.ToList();
-            CurrentPackage.PickUpTimeStart = NewPackage.PickUpTimeStart;
-            CurrentPackage.PickUpTimeEnd = NewPackage.PickUpTimeEnd;
+            CurrentPackage.Price = NewPackage.Price ?? CurrentPackage.Price;
+            CurrentPackage.Canteen = NewPackage.Canteen?? CurrentPackage.Canteen;
+            CurrentPackage.CanteenLocation = NewPackage.CanteenLocation ?? CurrentPackage.CanteenLocation;
+            CurrentPackage.Products = NewPackage.Products.ToList()?? CurrentPackage.Products;
+            CurrentPackage.PickUpTimeStart = NewPackage.PickUpTimeStart?? CurrentPackage.PickUpTimeStart;
+            CurrentPackage.PickUpTimeEnd = NewPackage.PickUpTimeEnd?? CurrentPackage.PickUpTimeEnd;
             CurrentPackage.Type = NewPackage.Type;
-            CurrentPackage.ReservedBy = NewPackage.ReservedBy;
-            CurrentPackage.StudentId = NewPackage.StudentId;
+            CurrentPackage.ReservedBy = NewPackage.ReservedBy?? CurrentPackage.ReservedBy;
+            CurrentPackage.StudentId = NewPackage.StudentId ?? CurrentPackage.StudentId;
 
             _context.SaveChanges();
 
@@ -111,11 +116,20 @@ namespace Infrastructure.Repository
         }
 
         //Delete
-        public void DeletePackageById(int id)
+        public bool DeletePackageById(int id)
         {
             var Package = _context.Packages.Find(id);
-            _context.Packages.Remove(Package!);
-            _context.SaveChanges();
+            if(Package == null)
+            {
+                return false;
+            }
+            else
+            {
+                _context.Packages.Remove(Package!);
+                _context.SaveChanges();
+                return true;
+            }
+
         }
      
     }

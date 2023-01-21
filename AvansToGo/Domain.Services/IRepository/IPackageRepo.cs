@@ -9,7 +9,7 @@ namespace Core.Domain.Services.IRepository
     public interface IPackageRepo
     {
         //Create
-        public Task AddPackage(Package package);
+        public Task<Package> AddPackage(Package package);
         //Read
         IQueryable<Package> GetAll();
         List<Package> GetReservedPackagesBy(Student Student);
@@ -22,6 +22,6 @@ namespace Core.Domain.Services.IRepository
 
         void AddUnreservedById(int UserId, int PackageId);
         //Delete
-        void DeletePackageById(int id);
+        bool DeletePackageById(int id);
     }
 }

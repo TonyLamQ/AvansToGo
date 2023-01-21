@@ -1,7 +1,6 @@
 
 using Core.Domain.Services.IRepository;
 using Infrastructure.Repository;
-
 using Microsoft.EntityFrameworkCore;
 using Infrastructure;
 using Microsoft.AspNetCore.Identity;
@@ -10,13 +9,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
+using WebService.GraphQL;
+using HotChocolate.AspNetCore;
+using HotChocolate.AspNetCore.Playground;
 
 var builder = WebApplication.CreateBuilder(args);
-
-//builder.Services.AddSwaggerGen(char=>
-//{
-
-//})
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AvansToGoContext>(options => options.UseSqlServer(connectionString));
@@ -30,6 +27,17 @@ builder.Services.AddScoped<IProductRepo, ProductEFRepository>();
 builder.Services.AddScoped<IEmployeeRepo, EmployeeEFRepository>();
 builder.Services.AddScoped<ICanteenRepo, CanteenEFRepository>();
 
+builder.Services.AddScoped<Query>();
+builder.Services.AddScoped<Mutation>();
+builder.Services.AddGraphQL(c => SchemaBuilder.New().AddServices(c).AddType<GraphQLTypes>()
+                                                            .AddQueryType<Query>()
+                                                            .AddMutationType<Mutation>()
+                                                            .Create());
+
+//builder.Services.AddGraphQLServer()
+//    .AddQueryType<Query>()
+//    .AddMutationType<Mutation>()
+//    .AddQueryType<GraphQLTypes>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedEmail = false)
     .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
@@ -58,13 +66,6 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddGraphQLServer()
-//     .AddAuthorization()
-//    .AddQueryType<Query>()
-//    .AddMutationType<Mutation>()
-//    .AddProjections()
-//    .AddFiltering().AddSorting();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -72,6 +73,27 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UsePlayground(new PlaygroundOptions
+    {
+        QueryPath="/api",
+        Path="/playground"
+    });
+    //app.UseGraphQL("/api");
+    app.UseRouting();
+
+    app.UseHttpsRedirection();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapGet("/playground", async context =>
+        {
+            await context.Response.WriteAsync("Hello World!");
+        });
+        endpoints.MapGraphQL();
+    });
+
 }
 
 
