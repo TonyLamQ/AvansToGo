@@ -207,7 +207,10 @@ namespace Portal.Controllers
         {
             var Prod = _ProductRepo.GetAll().ToList();
             var ThisPackage = _PackageRepo.GetPackageById(id);
-
+            if(ThisPackage.ReservedBy != null)
+            {
+                return View("Index", _PackageRepo.GetUnReservedPackagesFilteredDateAsc());
+            }
             var ContainedProductNames = new List<string>();
 
             if (ThisPackage.Products != null && ThisPackage.Products.Count != 0)
