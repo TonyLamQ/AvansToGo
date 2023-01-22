@@ -98,15 +98,15 @@ app.UsePlayground(new PlaygroundOptions
     Path = "/playground"
 });
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapGet("/playground", async context =>
-    {
-        await context.Response.WriteAsync("Hello World!");
-    });
-    endpoints.MapGraphQL();
-});
-//app.MapGraphQL();
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapGet("/playground", async context =>
+//    {
+//        await context.Response.WriteAsync("Hello World!");
+//    });
+//    endpoints.MapGraphQL();
+//});
+app.MapGraphQL();
 app.MapControllers();
 
 app.Run();
