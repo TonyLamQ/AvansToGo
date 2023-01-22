@@ -15,6 +15,8 @@ using HotChocolate.AspNetCore.Playground;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AvansToGoContext>(options => options.UseSqlServer(connectionString));
 
@@ -55,9 +57,9 @@ builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.Authenticati
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
         };
     });
-builder.Services.AddControllers();
-builder.Services.AddMvc();
-builder.Services.AddRazorPages();
+
+//builder.Services.AddMvc();
+//builder.Services.AddRazorPages();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -86,10 +88,10 @@ app.UseRouting();
 //}
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.MapControllers();
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.UsePlayground(new PlaygroundOptions
@@ -107,6 +109,6 @@ app.UsePlayground(new PlaygroundOptions
 //    endpoints.MapGraphQL();
 //});
 app.MapGraphQL();
-app.MapControllers();
+
 
 app.Run();
