@@ -31,15 +31,15 @@ builder.Services.AddScoped<ICanteenRepo, CanteenEFRepository>();
 
 builder.Services.AddScoped<Query>();
 builder.Services.AddScoped<Mutation>();
-builder.Services.AddGraphQL(c => SchemaBuilder.New().AddServices(c).AddType<GraphQLTypes>()
-                                                            .AddQueryType<Query>()
-                                                            .AddMutationType<Mutation>()
-                                                            .Create());
+//builder.Services.AddGraphQL(c => SchemaBuilder.New().AddServices(c).AddType<GraphQLTypes>()
+//                                                            .AddQueryType<Query>()
+//                                                            .AddMutationType<Mutation>()
+//                                                            .Create());
 
-//builder.Services.AddGraphQLServer()
-//    .AddQueryType<Query>()
-//    .AddMutationType<Mutation>()
-//    .AddQueryType<GraphQLTypes>();
+builder.Services.AddGraphQLServer()
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>()
+    .AddQueryType<GraphQLTypes>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedEmail = false)
     .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
@@ -77,7 +77,6 @@ var app = builder.Build();
 //    app.UseSwaggerUI();
 
 //app.UseGraphQL("/api");
-app.UseRouting();
 
 //    app.UseHttpsRedirection();
 //    app.UseAuthentication();
@@ -88,7 +87,9 @@ app.UseRouting();
 //}
 app.UseSwagger();
 app.UseSwaggerUI();
-app.MapControllers();
+
+app.UseRouting();
+
 app.UseHttpsRedirection();
 
 //app.UseAuthentication();
@@ -100,15 +101,17 @@ app.UsePlayground(new PlaygroundOptions
     Path = "/playground"
 });
 
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapGet("/playground", async context =>
-//    {
-//        await context.Response.WriteAsync("Hello World!");
-//    });
-//    endpoints.MapGraphQL();
-//});
-app.MapGraphQL();
+app.UseEndpoints(endpoints =>
+{
+    //endpoints.MapGet("/playground", async context =>
+    //{
+    //    await context.Response.WriteAsync("Hello World!");
+    //});
+    app.MapControllers();
+    endpoints.MapGraphQL();
+});
+
+//app.MapGraphQL();
 
 
 app.Run();

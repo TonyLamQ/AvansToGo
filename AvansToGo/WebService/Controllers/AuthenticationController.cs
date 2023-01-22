@@ -21,6 +21,7 @@ namespace WebApi.Controller
             _UserManager = userManager;
             _SignInManager = signInManager;
             _Configuration = configuration;
+            IdentitySeedData.EnsurePopulated(userManager).Wait();
         }
 
         [HttpPost("signin")]
