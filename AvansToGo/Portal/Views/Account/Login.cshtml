@@ -1,22 +1,25 @@
 ﻿@model LoginModel
 @{
-    ViewBag.Title = "Log In";
+    ViewBag.Title = "LogIn";
 }
 <div class="container mt-1">
-<div class="text-danger" asp-validation-summary="All"></div>
+    <div class="d-flex flex-column justify-content-center align-items-center w-100" style="height:70vh">
+    <div class="text-danger" asp-validation-summary="All"></div>
 
-<form asp-action="Login" asp-controller="Account" method="post">
-    <input type="hidden" asp-for="ReturnUrl"/>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-            <div><span asp-validation-for="Email" class="text-danger"></span></div>
-            <input asp-for="Email" class="form-control" />
+    <form asp-action="Login" asp-controller="Account" method="post" class="bgFrame shadow p-5 rounded-3">
+        <input type="hidden" asp-for="ReturnUrl"/>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+                <div><span asp-validation-for="Email" class="text-danger"></span></div>
+                <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="form-group pb-3">
+            <label asp-for="Password"></label>
+            <div><span asp-validation-for="Password" class="text-danger"></span></div>
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <div><span asp-validation-for="Password" class="text-danger"></span></div>
-        <input asp-for="Password" class="form-control" />
-    </div>
-    <button class="btn btn-primary" type="submit">Log In</button>
-</form>
+
 </div>

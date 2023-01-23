@@ -1,6 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-    
+    ViewData["Title"] = "HomePage";
 }
 @using Core.Domain
 @model List<Package>
@@ -14,35 +13,43 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
+            @*<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>*@
+            <img src="~/Banner1.png" width="100%" height="120%" />
 
             <div class="container">
                 <div class="carousel-caption text-start">
-                    <h1>Example headline.</h1>
-                    <p>Some representative placeholder content for the first slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                    <div class="bg-black bg-opacity-25 rounded-3 p-1 w-50">
+                        <h1 class="fw-bold">AvansToGo</h1>
+                        <p>It is way too good to let it go.</p>
+                        @if (User.HasClaim(c => c.Type == "Employee") && User.HasClaim(c => c.Type == "Student"))
+                        {
+                            <p><a class="btn btn-lg btn-secondary" asp-area="" asp-controller="Account" asp-action="Login">Login now!</a></p>
+                        }
+                    </div>
+
                 </div>
             </div>
         </div>
         <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
-
+            @*<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>*@
+            <img src="~/Banner2.jpg" width="100%" height="120%" />
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Some representative placeholder content for the second slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    <h1 class="text-secondary">Join us in making the world a better place</h1>
+                    <p>Reserve a package!</p>
+                    <p><a class="btn btn-lg btn-secondary" href="#">Learn more</a></p>
                 </div>
             </div>
         </div>
         <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
-
+@*            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>*@
+            <img src="~/banner3.jpg" width="100%" height="120%" />
             <div class="container">
-                <div class="carousel-caption text-end">
-                    <h1>One more for good measure.</h1>
-                    <p>Some representative placeholder content for the third slide of this carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                <div class="carousel-caption text-start">
+                    <div class="bg-black bg-opacity-25 rounded-3 p-1 w-50">
+                    <h1>Your meal</h1>
+                    <p>Get your meal in a package!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,38 +98,58 @@
           @*Input Code for-loop items*@
                 @foreach (var package in @Model)
                 {
-                    <div class="col">
+                        <div class="col">
                         <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
-                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                            </svg>
+                        <div class="container p-0" style="position:relative; text-align:center;">
 
+                        @if(package.Type == EnumMealType.Bread)
+                        {
+                            <img src="~/bread.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                        }
+                        @if (package.Type == EnumMealType.Beverage)
+                        {
+                            <img src="~/beverage.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                        } @if (package.Type != EnumMealType.Bread && package.Type != EnumMealType.Beverage)
+                        {
+                            <img src="~/hotmeal.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                        }
+
+                        @if (package.ContainsAlcohol == true)
+                        {
+                            <div class="text-primary fw-bold bg-opacity-50 bg-white rounded-pill" style="position:absolute;top:8px;right:9px;font-size:35px">18+</div>
+                        }
+
+                        </div>
                             <div class="card-body">
+                                <div class="d-flex justify-content-between" style="height:5rem;width:100%">
 
-                              <div class="d-flex justify-content-between">
-                                  <div class="d-flex justify-content-start">
-                                    <p class="card-text me-2">@package.Name</p>
-                                    @if(package.ContainsAlcohol == true)
-                                    {
-                                        <p class="card-text text-primary me-2 fw-bold">18+</p>
-                                    }
+                                  <div class="d-flex flex-column" style="width:40%"> 
+
+                                     <div class="d-flex justify-content-start">
+                                       <p class="fw-bold mb-0" style="font-size:20px">@package.Name</p>
+                                     </div>
+
+                                        <div class="d-flex justify-content-start">
+                                         Type: @package.Type
+                                     </div>
                                   </div>
-                                  <div class="d-flex justify-content-end">
-                                    <p class="">Pickup Time:@package.PickUpTimeStart.ToString() to @package.PickUpTimeEnd.ToString()</p>
+
+                                <div class="d-flex flex-column" style="width:60%;padding-top:30px">
+                                    <p class="m-0">From: @package.PickUpTimeStart.ToString()</p>
+                                    <p class="mb-0" style="margin-left:20px">To: @package.PickUpTimeEnd.ToString()</p>
                                   </div>
                                 
-                              </div>
+                                </div>
 
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
+                                    <div class="btn-group gap-1">
+
                                         <form asp-area="" asp-controller="Home" asp-action="PackageDetails" asp-route-id="@package.Id" method="post">
-                                            <input type="submit" class="btn btn-sm btn-outline-secondary" value="View" />
+                                        <input type="submit" class="btn btn-sm btn-main btn-outline-secondary" value="View">
                                         </form>
 
-                   
-
                                         <form asp-area="" asp-controller="Home" asp-action="ReservePackage" asp-route-id="@package.Id" method="post">
-                                            <input type="submit" class="btn btn-sm btn-outline-secondary" value="Add" />
+                                            <input type="submit" class="btn btn-sm btn-main btn-outline-secondary" value="Add" />
                                         </form>
 
                                     </div>
@@ -130,7 +157,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        </div>
+
                 }
       </div>
     </div>
