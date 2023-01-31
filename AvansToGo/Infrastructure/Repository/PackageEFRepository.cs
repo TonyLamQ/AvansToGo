@@ -73,20 +73,33 @@ namespace Infrastructure.Repository
 
             return CurrentPackage;
         }
-
+        public bool CanReserveOn(int UserId, int PackageId)
+        {
+            var packages = _context.Packages.Where(p=>p.StudentId==UserId).ToList();
+            var package = _context.Packages.Find(PackageId);
+            foreach(var p in packages)
+            {
+                if (p.PickUpTimeEnd == package.PickUpTimeEnd)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         public bool AddReservedById(int UserId, int PackageId)
         {
             var Bool = true;
             var Package = _context.Packages.Find(PackageId);
             var student = _context.Students.Find(UserId);
+
             if(Package!.ReservedBy == null)
             {
                 if (Package.ContainsAlcohol)
                 {
                     var age = Package.PickUpTimeStart.Value.Year - student.BirthDate.Year;
-                    if (age >=18)
+                    if (age >=18 && CanReserveOn(UserId, PackageId))
                     {
-                        Package!.ReservedBy = student;
+                            Package!.ReservedBy = student;
                     } else
                     {
                         Bool = false;
